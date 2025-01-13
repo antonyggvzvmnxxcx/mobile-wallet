@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2024 Mifos Initiative
+
+    This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+    If a copy of the MPL was not distributed with this file,
+    You can obtain one at https://mozilla.org/MPL/2.0/.
+
+    See https://github.com/openMF/mobile-wallet/blob/master/LICENSE.md
+-->
+<resources>
+    <string name="feature_send_money_insufficient_balance">Insufficient balance</string>
+    <string name="feature_send_money_error_fetching_balance">Error fetching balance</string>
+    <string name="feature_send_money_not_allowed">Self Account transfer is not allowed</string>
+    <string name="feature_send_money_send">Send Money</string>
+    <string name="feature_send_money_select_transfer_method">Select transfer method</string>
+    <string name="feature_send_money_vpa">VPA</string>
+    <string name="feature_send_money_mobile">Mobile number</string>
+    <string name="feature_send_money_amount">Amount</string>
+    <string name="feature_send_money_virtual_payment_address">Virtual Payment Address</string>
+    <string name="feature_send_money_submit">Submit</string>
+    <string name="feature_send_money_please_wait">Please wait…</string>
+    <string name="feature_send_money_phone_number">Phone Number</string>
+</resources>

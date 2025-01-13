@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright 2024 Mifos Initiative
+
+    This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
+    If a copy of the MPL was not distributed with this file,
+    You can obtain one at https://mozilla.org/MPL/2.0/.
+
+    See https://github.com/openMF/mobile-wallet/blob/master/LICENSE.md
+-->
+<resources>
+    <string name="feature_editpassword_password_changed_successfully">Password changed successfull</string>
+    <string name="feature_editpassword_change_password">Change Password</string>
+    <string name="feature_editpassword_current_password">Current Password</string>
+    <string name="feature_editpassword_new_password">New Password</string>
+    <string name="feature_editpassword_confirm_new_password">Confirm New Password</string>
+    <string name="feature_editpassword_old_password">Old Password</string>
+    <string name="feature_editpassword_password_length_error">Password too short</string>
+    <string name="feature_editpassword_password_mismatch_error">Password mismatch</string>
+    <string name="feature_editpassword_cancel">Cancel</string>
+    <string name="feature_editpassword_save">Save</string>
+</resources>

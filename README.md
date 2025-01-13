@@ -1,108 +1,90 @@
-<img height='175' src="https://user-images.githubusercontent.com/44283521/78983673-455cf780-7b42-11ea-849e-ecd2009dd562.png" align="left" hspace="1" vspace="1">
+![Frame 9 (2)](https://github.com/user-attachments/assets/4d53ff45-5348-41a5-98cd-a3dbabb52703)
+
+<div align="center">
 
 # Mobile Wallet
+Mobile Wallet is a Kotlin Multiplatform(KMP) based project built on top of Apache <a href='https://github.com/openMF/mobile-wallet/wiki/Fineract-backend'>Fineract</a> API.
+Following recommended architecture and design patterns, the application is developed using the latest technologies and frameworks/libraries, such as Jetpack Compose, Ktor, Ktorfit, and Koin. It is designed to be cross-platform, supporting Android, iOS, Desktop, and Web platforms.
 
-Mobile Wallet is an Android-based framework for mobile wallets based on top of <a href='https://github.com/openMF/mobile-wallet/wiki/Fineract-backend'>Fineract</a>. The app follows 
-<a href='https://github.com/openMF/mobile-wallet/wiki/Architecture'>clean architecture</a> and contains a core library module
-that can be used as a dependency in any other wallet based project. It is developed at <a href='https://mifos.org/'>MIFOS</a> together with a global community.
+![Kotlin](https://img.shields.io/badge/Kotlin-7f52ff?style=flat-square&logo=kotlin&logoColor=white)
+![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin%20Multiplatform-4c8d3f?style=flat-square&logo=kotlin&logoColor=white)
+![Compose Multiplatform](https://img.shields.io/badge/Jetpack%20Compose%20Multiplatform-000000?style=flat-square&logo=android&logoColor=white)
+
+![badge-android](http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat)
+![badge-ios](http://img.shields.io/badge/platform-ios-CDCDCD.svg?style=flat)
+![badge-desktop](http://img.shields.io/badge/platform-desktop-DB413D.svg?style=flat)
+![badge-js](http://img.shields.io/badge/platform-web-FDD835.svg?style=flat)
 
 
-| Master | Development | Chat |
-|------------|-----------------|-----------------|
-| ![Mobile-Wallet CI[Master/Dev]](https://github.com/openMF/mobile-wallet/workflows/Mobile-Wallet%20CI%5BMaster/Dev%5D/badge.svg?branch=master) | ![Mobile-Wallet CI[Master/Dev]](https://github.com/openMF/mobile-wallet/workflows/Mobile-Wallet%20CI%5BMaster/Dev%5D/badge.svg?branch=dev) | [![Join the chat at https://gitter.im/openMF/mobile-wallet](https://badges.gitter.im/openMF/mobile-wallet.svg)](https://gitter.im/openMF/mobile-wallet?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |
+[![PR Checks](https://github.com/openMF/mobile-wallet/actions/workflows/pr-check.yml/badge.svg)](https://github.com/openMF/mobile-wallet/actions/workflows/pr-check.yml)
+[![Join the chat at https://mifos.slack.com/](https://img.shields.io/badge/Join%20Our%20Community-Slack-blue)](https://mifos.slack.com/)
 
-## Screenshots
+</div>
 
-<p>
-  <img src="https://user-images.githubusercontent.com/37406965/51085243-86f2cd00-175c-11e9-9f5e-8a2324cfda4a.jpg" width="288" height="500" />
-  <img src="https://user-images.githubusercontent.com/37406965/51085245-8823fa00-175c-11e9-949a-c5292037b970.jpg" width="288" height="500" /> 
-  <img src="https://user-images.githubusercontent.com/37406965/51085246-89552700-175c-11e9-9a5b-5a85ecb5bfae.jpg" width="288" height="500" />
-</p>
-<p align="center">
-  Click <a href= "https://github.com/openMF/mobile-wallet/blob/dev/Screenshot.md">here </a> for more screenshots
-</p>
+<div align="center"><a name="readme-top"></a></div>
 
-## How to Contribute
+### Run the Project
+![Screenshot (154)](https://github.com/user-attachments/assets/761063ed-83f8-4443-b58f-2b68a4c74c5d)
 
-This is an OpenSource project and we would be happy to see new contributors. The issues should be raised via the GitHub issue tracker.
-For Issue tracker guidelines please click <a href="https://github.com/openMF/mobile-wallet/blob/master/.github/CONTRIBUTING.md#issue-tracker">here</a>. All fixes should be proposed via pull requests.
-For pull request guidelines please click <a href="https://github.com/openMF/mobile-wallet/blob/master/.github/CONTRIBUTING.md#pull-requests">here</a>. For commit style guidelines please click <a href="https://github.com/openMF/mobile-wallet/wiki/Commit-style-guide">here</a>.
+- **Android App**: Select the `mifospay-android` run configuration and click **Run**.
+- **Desktop App**: Select the `mifospay-desktop` run configuration and click **Run**.
+- **Web App (JavaScript)**: Select the `mifospasy-web-js` run configuration and click **Run**.
+- **iOS App**: Select the `mifospay-ios` run configuration and click **Run**.
+
+> \[!Important]
+> To run the iOS app, you must have a macOS device with Xcode installed. Currently, the `mifospay-web-wasm` app is not working as expected. We are working on it and it will be available soon.
+
+### Demo Credentials
+- **Fineract Instance**: `venus.mifos.io`
+- **Username**: `venus`
+- **Password**: `Venus2023#`
+
+### Join Us on Slack
+Mifos boasts an active and vibrant contributor community, Please join us on [slack](https://join.slack.com/t/mifos/shared_invite/zt-2f4nr6tk3-ZJlHMi1lc0R19FFEHxdvng). Once you've joined the mifos slack community, please join the `#mobile-wallet` channel to engage with mobile-wallet development. If you encounter any difficulties joining our Slack channel, please don't hesitate to open an issue. This will allow us to assist you promptly or send you an invitation.
+
+### How to Contribute
+Thank you for your interest in contributing to the Mobile Wallet project by Mifos! We welcome all contributions and encourage you to follow these guidelines to ensure a smooth and efficient collaboration process.
+
+The issues should be raised via the GitHub issue tracker. For Issue tracker guidelines please click <a href="https://github.com/openMF/mobile-wallet/blob/master/.github/CONTRIBUTING.md#issue-tracker">here</a>. All fixes should be proposed via pull requests. For pull request guidelines please click <a href="https://github.com/openMF/mobile-wallet/blob/master/.github/CONTRIBUTING.md#pull-requests">here</a>. For commit style guidelines please click <a href="https://github.com/openMF/mobile-wallet/wiki/Commit-style-guide">here</a>.
 
 ### Branch Policy
+For development purposes, always pull from the **dev** branch, as all contributions and updates are merged into this branch. Upon completion of development, changes are subsequently merged into the **master** branch, which represents the stable and bug-free version of the code.
 
-We have the following branches :
+### Development Setup
+Please refer to the  [Development Setup Guide](https://github.com/openMF/mobile-wallet/wiki/Set-up-an-environment) for detailed instructions on configuring the development environment.
 
- * **dev**
-     All the contributions should be pushed to this branch. If you're making a contribution,
-     you are supposed to make a pull request to _dev_.
-     Please make sure it passes a build check on Travis.
+### Committing Your Changes
+After making changes in your local repository, you will need to commit them to your GitHub repository.
+If you are unfamiliar with the process of committing changes, please refer to the [Committing Your Changes](https://github.com/openMF/mobile-wallet/wiki/Committing-Your-Changes) guide.
 
-     It is advisable to clone only the development branch using the following command:
+### Squashing Your Commits
+To ensure a clean and organized Git history, contributors are encouraged to squash their commits before merging.  
+Instructions on how to squash commits can be found in the [Squashing Your Commits](https://github.com/openMF/mobile-wallet/wiki/Squashing-Your-Commits) guide.
 
-    `git clone -b <branch> <remote_repo>`
-    
-    With Git 1.7.10 and later, add --single-branch to prevent fetching of all branches. Example, with development branch:
+### Resolving Merge Conflicts
+Occasionally, merge conflicts may arise when your pull request is being reviewed. These conflicts need to be resolved manually.  
+To learn how to resolve merge conflicts, please refer to the [Solving Merge Conflicts](https://github.com/openMF/mobile-wallet/wiki/Solving-Merge-Conflicts) guide.
 
-    `git clone -b dev --single-branch https://github.com/username/mobile-wallet.git`
+### Conclusion
+By following these contribution guidelines, you're all set to start contributing to the Mobile Wallet (Mifos Pay) project. We appreciate your efforts and look forward to your valuable contributions. Happy coding!
 
- * **master**
-   The master branch contains all the stable and bug-free working code. The development branch once complete will be merged with this branch.
-   
- * **redesign**
-   The app is presently being redesigned. All the work done under the redesign domain should be committed to this branch.
-   
-## Development Setup
+### Instructions to Get the Latest APK
 
-Before you begin, you should have already downloaded the Android Studio SDK and set it up correctly. You can find a guide on how to do this here: [Setting up Android Studio](http://developer.android.com/sdk/installing/index.html?pkg=studio).
+To download the latest APK navigate to the latest release [here](https://github.com/openMF/mobile-wallet/releases), and download the APK file from the assets section.
 
-## Building the Code
+### Wiki
+To know more about the project details and architecture guidelines, visit our [Wiki](https://github.com/openMF/mobile-wallet/wiki).
 
-1. Fork the repository.
+### Contributors
 
-2. Go to your fork and clone only the dev branch using `git clone -b dev <remote_repo>`(remote_repo url refers to your fork).
+Special thanks to the incredible code contributors who continue to drive this project forward.
 
-3. Click on 'Open an existing Android Studio project'.
+<a href="https://github.com/openMF/mobile-wallet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=openMF/mobile-wallet"  alt="mobile wallet contributors"/>
+</a>
 
-4. Browse to the directory where you cloned the mobile-wallet repo and click OK.
+<div align="right">
 
-5. Let Android Studio import the project.
+[![Back To Top](https://img.shields.io/badge/Back%20To%20Top-Blue?style=flat)](#readme-top)
 
-6. Let the gradle sync.
-
-7. There should be no errors in gradle build.
-
-8. Set your remote upstream to the remote repository to pull changes whenever needed, using
-`git remote add upstream https://github.com/openMF/mobile-wallet.git` 
-
-9. Pull changes from dev branch of upstream, whenever needed, using
-`git checkout dev`
-`git pull upstream dev`
-
-## GitHub Actions CI
-<a href="https://docs.github.com/en/free-pro-team@latest/actions">GitHub Actions CI</a> is a continuous integration service used to build and test software projects hosted at GitHub. We use GitHub Actions for continous integration and clean maintainence of code. All your pull requests must pass the CI build only then, it will be allowed to merge. Sometimes,when the build doesn't pass you can use these commands in your local terminal and check for the errors,</br>
-
-For Mac OS, you can use the following commands:
-
-* `./gradlew check` quality checks on your project’s code using Checkstyle and generates reports from these checks.</br>
-* `./gradlew spotlessApply` an check and apply formatting to any plain-text file.</br>
-* `./gradlew build`  provides a command line to execute build script.</br>
-
-
-For Windows, you can use the following commands:
-
-* `gradlew check` quality checks on your project’s code using Checkstyle and generates reports from these checks.</br>
-* `gradlew spotlessApply` an check and apply formatting to any plain-text file.</br>
-* `gradlew build`  provides a command line to execute build script.</br>
-
-### Instructions to get the latest APK
-
-To get the latest apk fom the Github actions artifacts, follow these steps:
-
-1. Navigate to the [Actions](https://github.com/openMF/mobile-wallet/actions?query=workflow%3A%22Mobile-Wallet+CI%5BMaster%2FDev%5D%22+event%3Apush) tab of this repository.
-2. Click the latest workflow from the workflows list.
-3. Scroll down to the **Artifacts** section and click the **mobile-wallet** hyperlink.
-4. After successful download, extract the zip file to your preferred location.
-
-## Wiki
-
-https://github.com/openMF/mobile-wallet/wiki
+</div>
