@@ -25,7 +25,7 @@ kotlin {
         commonMain.dependencies {
             api(projects.coreBase.designsystem)
             // Theme wires LocalScreenStateDefaults from core/store so every screen
-            // wrapped by MifosTheme picks up the app's branded ScreenState defaults.
+            // wrapped by KptTheme picks up the app's branded ScreenState defaults.
             implementation(projects.core.store)
 
             implementation(compose.ui)
@@ -38,23 +38,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.coil.kt.compose)
-
-            // Fork-specific: BottomSheet.kt uses com.arkivanov.essenty.backhandler.BackCallback
-            // for KMP-safe hardware back-button handling. Template's core/designsystem doesn't
-            // ship a BottomSheet — it consumes M3's ModalBottomSheet directly per-feature.
-            implementation(libs.back.handler)
-
-            // Fork-specific: MifosIcons.kt references FluentIcons (Coin/Person/Wallet variants)
-            // for brand-consistent iconography beyond Material's Icons.Default.* set.
-            implementation(libs.fluentui.system.icons)
-        }
-        // Fork-specific androidMain deps for PermissionBox.kt (androidx.activity
-        // rememberLauncherForActivityResult / ActivityResultContracts + androidx.core
-        // ContextCompat/ActivityCompat). Template doesn't ship PermissionBox so its
-        // core/designsystem module doesn't need these.
-        androidMain.dependencies {
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.core.ktx)
         }
     }
 }
@@ -64,3 +47,15 @@ compose.resources {
     generateResClass = always
     packageOfResClass = "kpt.core.designsystem.generated.resources"
 }
+// ── Fork-owned dependency seam (white-label, mirrors `feature-deps.gradle.kts`) ────────────────
+// A fork adds its OWN dependencies for this module in `core/designsystem/module-deps.gradle.kts` — never in
+// this file. That is what lets THIS build file be `owner: template` and FULL-COPY on a template
+// sync: the fork's deps live in a file the sync never touches, so a template plugin/version bump
+// can no longer drop them and no 3-way merge is needed.
+//
+// String `"commonMainImplementation"(...)` notation is used in the seam, not the type-safe
+// `libs.`/`projects.` accessors: those are NOT generated for `apply(from = ...)` script plugins.
+//
+// Guarded like feature-deps: a fork that adopted the template BEFORE this seam existed may not have
+// the file yet, and an unconditional apply would fail the whole configuration.
+project.file("module-deps.gradle.kts").takeIf { it.exists() }?.let { apply(from = it) }

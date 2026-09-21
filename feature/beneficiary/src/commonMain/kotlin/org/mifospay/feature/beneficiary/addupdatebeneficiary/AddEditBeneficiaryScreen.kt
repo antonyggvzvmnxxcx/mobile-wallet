@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.toSize
 import androidx.compose.ui.window.PopupProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.beneficiary.generated.resources.Res
 import mifos_pay.feature.beneficiary.generated.resources.feature_beneficiary_account_no
 import mifos_pay.feature.beneficiary.generated.resources.feature_beneficiary_account_type
@@ -78,7 +79,6 @@ import org.mifospay.core.model.utils.Locale
 import org.mifospay.core.model.utils.filterLocales
 import org.mifospay.core.ui.MifosDivider
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun AddEditBeneficiaryScreen(

@@ -27,11 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.base.store.screen.ScreenState
 import kpt.core.base.ui.screen.ScreenContent
-import mifos_pay.feature.profile.generated.resources.Res
-import mifos_pay.feature.profile.generated.resources.feature_profile
-import mifos_pay.feature.profile.generated.resources.feature_profile_personal_qr_code
+import kpt.feature.profile.generated.resources.Res
+import kpt.feature.profile.generated.resources.feature_profile
+import kpt.feature.profile.generated.resources.feature_profile_personal_qr_code
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import org.mifospay.core.designsystem.component.BasicDialogState
@@ -45,7 +46,6 @@ import org.mifospay.core.model.client.Client
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.profile.components.ProfileDetailsCard
 import org.mifospay.feature.profile.components.ProfileImage
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun ProfileScreen(

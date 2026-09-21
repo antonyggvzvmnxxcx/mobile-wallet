@@ -21,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import org.mifos.authenticator.biometrics.platformAuthenticator.PlatformAuthOptions
 import org.mifos.authenticator.biometrics.platformAuthenticator.PlatformAvailableAuthenticationOption
 import org.mifos.authenticator.passcode.components.PasscodeKey
 import org.mifos.authenticator.passcode.screen.PasscodeKeyConfig
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Platform-aware biometric unlock button rendered in the

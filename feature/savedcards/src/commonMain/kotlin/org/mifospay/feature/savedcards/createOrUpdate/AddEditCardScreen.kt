@@ -46,6 +46,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.savedcards.generated.resources.Res
 import mifos_pay.feature.savedcards.generated.resources.feature_savedcards_card_number
 import mifos_pay.feature.savedcards.generated.resources.feature_savedcards_expiry_date
@@ -67,7 +68,6 @@ import org.mifospay.core.ui.MifosPasswordField
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.savedcards.components.CreditCard
 import org.mifospay.feature.savedcards.components.getCardNumberTransformation
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun AddEditCardScreen(

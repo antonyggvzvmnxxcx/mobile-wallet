@@ -30,14 +30,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
-import mifos_pay.feature.profile.generated.resources.Res
-import mifos_pay.feature.profile.generated.resources.feature_profile_edit_profile
-import mifos_pay.feature.profile.generated.resources.feature_profile_email
-import mifos_pay.feature.profile.generated.resources.feature_profile_firstname
-import mifos_pay.feature.profile.generated.resources.feature_profile_lastname
-import mifos_pay.feature.profile.generated.resources.feature_profile_mobile
-import mifos_pay.feature.profile.generated.resources.feature_profile_save
-import mifos_pay.feature.profile.generated.resources.feature_profile_vpa
+import kpt.core.base.designsystem.theme.KptTheme
+import kpt.feature.profile.generated.resources.Res
+import kpt.feature.profile.generated.resources.feature_profile_edit_profile
+import kpt.feature.profile.generated.resources.feature_profile_email
+import kpt.feature.profile.generated.resources.feature_profile_firstname
+import kpt.feature.profile.generated.resources.feature_profile_lastname
+import kpt.feature.profile.generated.resources.feature_profile_mobile
+import kpt.feature.profile.generated.resources.feature_profile_save
+import kpt.feature.profile.generated.resources.feature_profile_vpa
 import org.jetbrains.compose.resources.getString
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -50,7 +51,6 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.component.MifosTextField
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.profile.components.EditableProfileImage
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun EditProfileScreen(

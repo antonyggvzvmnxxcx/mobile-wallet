@@ -14,8 +14,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import kpt.core.base.designsystem.theme.KptTheme
 import org.mifospay.core.model.standinginstruction.StandingInstruction
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun PriorityChip(

@@ -32,6 +32,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigationevent.NavigationEventInfo
 import androidx.navigationevent.compose.NavigationBackHandler
 import androidx.navigationevent.compose.rememberNavigationEventState
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.passcode.generated.resources.Res
 import mifos_pay.feature.passcode.generated.resources.feature_passcode_biometric_setup_confirm
 import mifos_pay.feature.passcode.generated.resources.feature_passcode_biometric_setup_headline
@@ -48,7 +49,6 @@ import org.mifospay.core.designsystem.component.MifosDialogBox
 import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 /** Navigation-event info marker for the biometric setup destination. */
 internal object BiometricSetupScreenCurrentInfo : NavigationEventInfo()

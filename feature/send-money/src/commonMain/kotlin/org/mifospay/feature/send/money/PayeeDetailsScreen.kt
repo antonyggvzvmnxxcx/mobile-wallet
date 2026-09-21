@@ -65,6 +65,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.send_money.generated.resources.Res
 import mifos_pay.feature.send_money.generated.resources.feature_send_money_add_bank_account
 import mifos_pay.feature.send_money.generated.resources.feature_send_money_add_bank_account_desc
@@ -91,7 +92,6 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.component.MifosTopBar
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun PayeeDetailsScreen(

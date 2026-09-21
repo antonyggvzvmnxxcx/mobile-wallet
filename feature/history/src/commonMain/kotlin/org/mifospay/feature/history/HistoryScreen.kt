@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.history.generated.resources.Res
 import mifos_pay.feature.history.generated.resources.feature_history_empty
 import mifos_pay.feature.history.generated.resources.feature_history_empty_filter
@@ -56,7 +57,6 @@ import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.TransactionFilterBottomSheet
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.history.components.TransactionList
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun HistoryScreen(

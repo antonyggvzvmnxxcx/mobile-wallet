@@ -53,6 +53,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.send_money.generated.resources.Res
 import mifos_pay.feature.send_money.generated.resources.feature_send_money_account_number
 import mifos_pay.feature.send_money.generated.resources.feature_send_money_account_number_error
@@ -82,7 +83,6 @@ import org.mifospay.core.designsystem.component.MifosTextField
 import org.mifospay.core.designsystem.component.MifosTopBar
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

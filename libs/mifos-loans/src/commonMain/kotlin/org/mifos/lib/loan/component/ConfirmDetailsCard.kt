@@ -21,10 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.mifospay.core.designsystem.component.MifosCard
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Displays a summary card containing a list of labeled details, typically used for confirmation screens.

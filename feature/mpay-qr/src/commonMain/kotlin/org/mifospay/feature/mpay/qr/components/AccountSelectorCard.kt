@@ -33,6 +33,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr.generated.resources.Res
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_primary
 import mifos_pay.feature.mpay_qr.generated.resources.logo
@@ -42,8 +44,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.model.account.DefaultAccount
 import org.mifospay.core.model.client.Client
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Professional account selector card displaying:

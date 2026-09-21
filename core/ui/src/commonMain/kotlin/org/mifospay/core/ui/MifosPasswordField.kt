@@ -33,11 +33,11 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.component.MifosCustomTextField
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.utils.tabNavigation
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun MifosPasswordField(

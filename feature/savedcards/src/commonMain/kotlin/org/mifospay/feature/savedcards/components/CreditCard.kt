@@ -50,12 +50,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.times
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.resources.painterResource
 import org.mifospay.feature.savedcards.createOrUpdate.AECardState
 import org.mifospay.feature.savedcards.utils.CardMaskStyle
 import org.mifospay.feature.savedcards.utils.CardType
 import org.mifospay.feature.savedcards.utils.creditCardColors
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun CreditCard(

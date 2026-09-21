@@ -27,13 +27,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr.generated.resources.Res
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_inter_bank_unavailable
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Placeholder card shown when Inter-Bank QR code cannot be generated.

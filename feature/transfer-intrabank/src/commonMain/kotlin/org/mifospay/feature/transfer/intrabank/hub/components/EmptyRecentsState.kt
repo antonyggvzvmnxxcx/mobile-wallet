@@ -23,6 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_intrabank.generated.resources.Res
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_send_money_add_payee
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_send_money_no_recents
@@ -31,8 +33,6 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.component.MifosOutlinedButton
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun EmptyRecentsState(

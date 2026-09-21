@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.Res
 import kpt.core.ui.generated.resources.artwork
 import kpt.core.ui.generated.resources.core_ui_money_in
@@ -40,7 +41,6 @@ import org.jetbrains.compose.resources.painterResource
 import org.mifospay.core.designsystem.component.MifosButton
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.MifosTheme
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun EmptyContentScreen(

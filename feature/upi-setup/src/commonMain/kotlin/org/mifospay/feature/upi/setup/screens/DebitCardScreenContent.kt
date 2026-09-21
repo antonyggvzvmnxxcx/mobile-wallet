@@ -33,10 +33,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.ui.ExpiryDateInput
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun DebitCardScreenContent(

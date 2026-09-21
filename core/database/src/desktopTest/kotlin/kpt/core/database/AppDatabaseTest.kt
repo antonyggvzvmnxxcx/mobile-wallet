@@ -58,9 +58,11 @@ class AppDatabaseTest {
 
     @Test
     fun databaseVersionIsCurrent() {
-        // Fork wallet schema — bumped to 8 by the transfer-detail Store5 vertical
-        // (AutoMigration(7→8) adding the wallet_transfer_details table). Update this
-        // constant when bumping AppDatabase.VERSION so the guardrail stays meaningful.
+        // Fork wallet schema, currently at 9 — the transfer-detail Store5 vertical added
+        // wallet_transfer_details via AutoMigration(7→8), and AutoMigration(8→9) follows it.
+        // This guards the FORK's AppDatabase, not the upstream template demo database
+        // (whose own version advances independently). Update this constant when bumping
+        // AppDatabase.VERSION so the guardrail stays meaningful.
         assertEquals(9, AppDatabase.VERSION)
     }
 

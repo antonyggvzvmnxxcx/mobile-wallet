@@ -12,6 +12,7 @@ package kpt.core.base.store.screen
 import io.github.mobilebytelabs.kmptoolkit.networkmonitor.NetworkMonitor
 import io.github.mobilebytelabs.kmptoolkit.networkmonitor.NetworkStatus
 import io.github.mobilebytelabs.kmptoolkit.networkmonitor.networkStatusDebouncedState
+import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
 import kotlinx.coroutines.CoroutineScope
@@ -64,7 +65,7 @@ const val DEFAULT_USER_REFRESH_DEBOUNCE_MS: Long = 1_000L
  *
  * Eliminates all ViewModel boilerplate:
  * - No manual network observation (auto-refreshes on reconnect)
- * - No manual DataState → UI state mapping (DecisionEngine handles it)
+ * - No manual raw-state → UI state mapping (DecisionEngine handles it)
  * - No manual retry/refresh logic (built-in)
  * - No WiFi↔Cell handoff flicker (debounced at 300ms)
  * - Preserves existing content during pull-to-refresh (lastContent cache)
@@ -87,6 +88,19 @@ const val DEFAULT_USER_REFRESH_DEBOUNCE_MS: Long = 1_000L
  * ```
  */
 @OptIn(kotlin.time.ExperimentalTime::class)
+/**
+ * One-shot carrier for force-fresh intent between [ScreenDataStream]'s refresh entry points and the
+ * `storeFlow` built in `asScreenStream`. Deliberately NOT a Flow: merging a second flow into the read
+ * pipeline added an async subscription hop, and `refreshTrigger` has replay = 0, so a reconnect
+ * `tryEmit` landing inside that window was dropped.
+ */
+internal class ForceFreshLatch {
+    var pending: Boolean = false
+
+    /** Read-and-reset — the force applies to exactly one read. */
+    fun consume(): Boolean = pending.also { pending = false }
+}
+
 class ScreenDataStream<T> internal constructor(
     /**
      * Cold Flow of ScreenState decisions. Consumer should call .stateIn() once.
@@ -108,10 +122,28 @@ class ScreenDataStream<T> internal constructor(
      */
     val freshness: Flow<FreshnessSignal> = emptyFlow(),
     private val refreshTrigger: MutableSharedFlow<Unit>,
+    /**
+     * Optional observation channel for [refreshFresh] — a test can subscribe to assert that a FORCED
+     * refresh was dispatched, distinctly from a policy-driven one. Kept separate from [refreshTrigger]
+     * (rather than widening that flow's element type) so the public test-only factory stays
+     * source-compatible. NOT part of the read pipeline: intent reaches `storeFlow` via [forceNextRead]
+     * so the collector's subscription topology stays exactly as it was before force-fresh existed —
+     * merging a second flow in added an async subscription hop, and `refreshTrigger` has replay = 0,
+     * so a reconnect `tryEmit` landing in that window was silently dropped.
+     */
+    private val forceFreshTrigger: MutableSharedFlow<Unit> = MutableSharedFlow(extraBufferCapacity = 1),
     private val userRefreshDebounceMs: Long = DEFAULT_USER_REFRESH_DEBOUNCE_MS,
     private val timeSource: kotlin.time.TimeSource = kotlin.time.TimeSource.Monotonic,
+    /**
+     * Shared with the `storeFlow` built in `asScreenStream`: set just before a trigger emit, consumed
+     * by that flow's `flatMapLatest`. Carries force-fresh intent WITHOUT adding a second flow to the
+     * read pipeline, so the collector's subscription topology is unchanged.
+     */
+    private val forceLatch: ForceFreshLatch = ForceFreshLatch(),
 ) {
     private var lastRefreshMark: kotlin.time.TimeMark? = null
+
+
 
     /**
      * Trigger a network refresh. Preserves existing content while loading.
@@ -120,8 +152,17 @@ class ScreenDataStream<T> internal constructor(
      * the network layer from accidental thrashing when a user mashes pull-to-refresh.
      * The first tap fires immediately; subsequent taps inside the window are dropped
      * silently. Pass `userRefreshDebounceMs = 0L` on the builder to disable.
+     *
+     * Pass [forceFresh] `= true` for a USER-INITIATED refresh (pull-to-refresh, retry button): the
+     * user asserted intent to burn a request, so the read bypasses the policy's cache-first shape and
+     * issues `StoreReadRequest.fresh(...)`. Without it, a refresh under the [FetchPolicy.CACHE_FIRST_SWR]
+     * default merely re-serves cache while revalidation stays band-gated — so on a `Fresh` band the
+     * user's pull-to-refresh does nothing. [FetchPolicy.CACHE_ONLY] ignores the force and stays local.
+     *
+     * Debouncing applies either way — unlike [refreshFresh], which is the undebounced variant for
+     * post-mutation invalidate.
      */
-    fun refresh() {
+    fun refresh(forceFresh: Boolean = false) {
         if (userRefreshDebounceMs > 0L) {
             val mark = lastRefreshMark
             if (mark != null) {
@@ -132,17 +173,26 @@ class ScreenDataStream<T> internal constructor(
             }
             lastRefreshMark = timeSource.markNow()
         }
+        forceLatch.pending = forceFresh
+        if (forceFresh) forceFreshTrigger.tryEmit(Unit)
         refreshTrigger.tryEmit(Unit)
     }
 
-    /** Retry loading (semantic alias for refresh — used on error/no-network screens). */
-    fun retry() = refresh()
+    /**
+     * Retry loading (semantic alias for refresh — used on error/no-network screens). Forces a fresh
+     * fetch: a retry after an error must reach the network, not re-serve the cache that failed.
+     */
+    fun retry() = refresh(forceFresh = true)
 
     /**
-     * Force a fresh network fetch that bypasses the SWR band gate wired around
-     * [FetchPolicy.CACHE_FIRST_SWR] — used by pull-to-refresh and post-mutation
-     * invalidate paths where the caller has already asserted intent to burn a
-     * request. Distinct from [refresh] because it does NOT honor the
+     * Force a fresh network fetch that bypasses BOTH the read policy's own cache-first shape and
+     * the SWR band gate wired around [FetchPolicy.CACHE_FIRST_SWR] — used by pull-to-refresh and
+     * post-mutation invalidate paths where the caller has already asserted intent to burn a
+     * request. Emits through [forceFreshTrigger], which routes `streamDataForPolicy` to
+     * `StoreReadRequest.fresh(fallBackToSourceOfTruth = true)` instead of the policy's normal
+     * request. (Before this was wired the trigger carried no intent, so under the
+     * `CACHE_FIRST_SWR` default this method re-subscribed to `cached(refresh = false)` and issued
+     * no request at all.) Distinct from [refresh] because it does NOT honor the
      * `userRefreshDebounceMs` window; the caller is responsible for its own
      * debouncing. Emits through the same [refreshTrigger] so `lastContent`
      * preservation, the freshness banner, and captive-portal detection all
@@ -152,6 +202,8 @@ class ScreenDataStream<T> internal constructor(
      * layer.
      */
     fun refreshFresh() {
+        forceLatch.pending = true
+        forceFreshTrigger.tryEmit(Unit)
         refreshTrigger.tryEmit(Unit)
     }
 }
@@ -190,6 +242,7 @@ annotation class ExperimentalScreenDataStreamTestingApi
 fun <T> screenDataStreamForTesting(
     state: Flow<ScreenState<T>>,
     refreshTrigger: MutableSharedFlow<Unit> = MutableSharedFlow(extraBufferCapacity = 1),
+    forceFreshTrigger: MutableSharedFlow<Unit> = MutableSharedFlow(extraBufferCapacity = 1),
     userRefreshDebounceMs: Long = 0L, // tests don't want debounce by default
     timeSource: kotlin.time.TimeSource = kotlin.time.TimeSource.Monotonic,
     freshness: Flow<FreshnessSignal> = emptyFlow(),
@@ -197,6 +250,7 @@ fun <T> screenDataStreamForTesting(
     state = state,
     freshness = freshness,
     refreshTrigger = refreshTrigger,
+    forceFreshTrigger = forceFreshTrigger,
     userRefreshDebounceMs = userRefreshDebounceMs,
     timeSource = timeSource,
 )
@@ -251,6 +305,16 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     reconnectDebounceMs: Long = DEFAULT_RECONNECT_DEBOUNCE_MS,
     userRefreshDebounceMs: Long = DEFAULT_USER_REFRESH_DEBOUNCE_MS,
     ttl: Duration = 24.hours,
+    // The SWR band gate's time source. Defaulted, so no production call site changes.
+    //
+    // It exists because the band is computed from the DRIFT between two real-clock reads: the mapper
+    // stamps `lastFetchInstant = Clock.System.now()` on the first cache emission, and this gate then
+    // reads `now()` again. With a small `ttl` the whole outcome hinges on whether the clock happened
+    // to tick in between — `age == 0` lands on `age <= ttl` -> Fresh and no revalidation fires. That
+    // made `CacheFirstSwrTest.staleBandTriggersBackgroundSwap` pass on desktop/iOS/JS by luck and
+    // hang on wasm/node, whose clock does not tick in that window. A test can now pin the instant
+    // instead of hoping for drift.
+    clock: Clock = Clock.System,
 ): ScreenDataStream<Output> {
     // Single debounced NetworkStatus StateFlow shared by reconnect trigger, screen state,
     // and freshness combine. When reconnectDebounceMs > 0, transient WiFi↔Cell handoffs
@@ -263,6 +327,8 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     }
 
     val refreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val forceFreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val forceLatch = ForceFreshLatch()
 
     // Auto-refresh when network reconnects. Uses the same debounced status flow so a brief
     // handoff that doesn't reach Unavailable→Available never triggers a spurious fetch.
@@ -301,10 +367,18 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     // Track last known content to preserve during refresh
     var lastContent: StoreData<Output>? = null
 
+    // Policy-driven refreshes (user tap, reconnect, PERIODIC ticker) carry `false`; refreshFresh()
+    // carries `true`. Merging keeps ONE ordered trigger stream while leaving refreshTrigger's public
+    // `MutableSharedFlow<Unit>` shape untouched.
     val storeFlow: Flow<StoreData<Output>> = refreshTrigger
         .onStart { emit(Unit) } // Initial load on subscription
         .flatMapLatest {
-            streamDataForPolicy(key = key, policy = fetchPolicy, isEmpty = isEmpty)
+            streamDataForPolicy(
+                key = key,
+                policy = fetchPolicy,
+                isEmpty = isEmpty,
+                forceFresh = forceLatch.consume(),
+            )
         }
         .map { storeData ->
             // Persistence: when Store5 hands us NETWORK-origin data with a fresh
@@ -319,6 +393,14 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
                 storeData.fetchedAtInstant == null && persistedFetchedAt != null ->
                     storeData.copy(fetchedAtInstant = persistedFetchedAt)
                 else -> storeData
+            }
+            // Offline-local (CACHE_ONLY) has NO network fetcher, so there is no
+            // "refresh in flight" during which to preserve the previous content — every
+            // SoT emission is authoritative. An empty read is a genuine deletion and MUST
+            // surface as empty (so DecisionEngine renders Empty), not a stale-content flash.
+            if (fetchPolicy == FetchPolicy.CACHE_ONLY) {
+                lastContent = enriched
+                return@map enriched
             }
             val cached = lastContent
             if (!enriched.isEmpty) {
@@ -346,7 +428,7 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     // That path drives the fetcher AND writes the SourceOfTruth; the base
     // storeFlow (built on `cached(key, refresh = false)`, see
     // `streamDataForPolicy`) continuously observes the SoT and re-emits the
-    // swapped-in fresh value automatically. See `RoomChangeBusSwrTest` for the
+    // swapped-in fresh value automatically. See `SourceOfTruthReEmissionSwrTest` for the
     // invariant this fix relies on: a SoT write DOES re-fan-out through an
     // already-open `cached(refresh = false)` subscription.
     //
@@ -367,38 +449,22 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     if (fetchPolicy is FetchPolicy.CACHE_FIRST_SWR) {
         scope.launch {
             var lastBand: FreshnessBand? = null
-            var lastFetchNeeded = false
             storeFlow.collect { storeData ->
                 val band = FreshnessBands.bandFor(
-                    now = kotlin.time.Clock.System.now(),
+                    now = clock.now(),
                     lastSyncedAt = storeData.fetchedAtInstant,
                     ttl = ttl,
                     lastError = storeData.error,
                 )
-                // Fire the fetch when the cache is Stale/VeryStale/Initial OR EMPTY.
-                // An empty cache (`isEmpty` — no data yet) ALWAYS needs the first fetch,
-                // even when Store5 stamps a "now" `fetchedAt` on the empty SourceOfTruth
-                // read (which makes `bandFor` return Fresh): freshness is meaningless with
-                // no data. THIS was the on-device hang — every never-synced store emitted
-                // band=Fresh + isEmpty=true and its fetcher never fired, so the offline
-                // layer sat in Loading forever. Edge-detected via `lastFetchNeeded` so it
-                // fires exactly once (data arrives → isEmpty=false → no re-fire; a failed
-                // fetch that stays empty won't thrash — refresh()/retry()/reconnect re-fire
-                // through refreshTrigger).
-                // Gate on ONLINE: never launch a doomed fetch when there's no usable network.
-                // Offline + empty already renders NoNetwork via DecisionEngine; firing a fetch that
-                // can't reach the server just hangs (no data, no error) — and if the monitor is
-                // momentarily 'Available' the screen would sit on Loading forever waiting for it.
-                // The reconnect trigger (Unavailable→Available) re-emits storeFlow and re-fires this
-                // gate once the network is back, so nothing is lost.
+                val isStale = band == FreshnessBand.Stale || band == FreshnessBand.VeryStale
+                val wasStale = lastBand == FreshnessBand.Stale || lastBand == FreshnessBand.VeryStale
+                // Gate the SWR revalidation on ONLINE: never fire a doomed background fetch
+                // while offline (or on a falsely-'Available' no-plan / captive-portal link). This
+                // side-fetch is already decoupled from rendering, so offline it only wastes a
+                // guaranteed-to-fail network attempt (and can leave a spurious error stamp). The
+                // reconnect trigger re-emits storeFlow, so the gate re-fires once the network is back.
                 val isOnline = networkStatusFlow.value is NetworkStatus.Available
-                val fetchNeeded = isOnline && (
-                    band == FreshnessBand.Stale ||
-                        band == FreshnessBand.VeryStale ||
-                        band == FreshnessBand.Initial ||
-                        storeData.isEmpty
-                    )
-                if (fetchNeeded && !lastFetchNeeded) {
+                if (isOnline && isStale && !wasStale) {
                     scope.launch {
                         try {
                             this@asScreenStream
@@ -433,7 +499,6 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
                     }
                 }
                 lastBand = band
-                lastFetchNeeded = fetchNeeded
             }
         }
     }
@@ -447,10 +512,14 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
         storeFlow,
         networkStatusFlow,
     ) { storeData, status ->
-        DecisionEngine.decide(storeData, status)
+        DecisionEngine.decide(storeData, status, fetchPolicy)
     }.onStart {
         val current = networkStatusFlow.value
-        if (current !is NetworkStatus.Available) {
+        // Pre-emit NoNetwork so an offline screen shows it instead of a Loading flash — EXCEPT for the
+        // offline-first [FetchPolicy.CACHE_FIRST_SWR], which lets the DecisionEngine decide from the
+        // first storeFlow emission (Content for cached data, Empty for genuinely-no-data) so it never
+        // flashes the blocking NoNetwork state offline. Matches the DecisionEngine offline-empty rule.
+        if (current !is NetworkStatus.Available && fetchPolicy != FetchPolicy.CACHE_FIRST_SWR) {
             emit(ScreenState.NoNetwork(isCaptivePortal = current is NetworkStatus.CaptivePortal))
         }
     }
@@ -468,6 +537,8 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
         state = screenStateFlow,
         freshness = freshnessFlow,
         refreshTrigger = refreshTrigger,
+        forceFreshTrigger = forceFreshTrigger,
+        forceLatch = forceLatch,
         userRefreshDebounceMs = userRefreshDebounceMs,
     )
 }
@@ -494,6 +565,16 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     reconnectDebounceMs: Long = DEFAULT_RECONNECT_DEBOUNCE_MS,
     userRefreshDebounceMs: Long = DEFAULT_USER_REFRESH_DEBOUNCE_MS,
     ttl: Duration = 24.hours,
+    // The SWR band gate's time source. Defaulted, so no production call site changes.
+    //
+    // It exists because the band is computed from the DRIFT between two real-clock reads: the mapper
+    // stamps `lastFetchInstant = Clock.System.now()` on the first cache emission, and this gate then
+    // reads `now()` again. With a small `ttl` the whole outcome hinges on whether the clock happened
+    // to tick in between — `age == 0` lands on `age <= ttl` -> Fresh and no revalidation fires. That
+    // made `CacheFirstSwrTest.staleBandTriggersBackgroundSwap` pass on desktop/iOS/JS by luck and
+    // hang on wasm/node, whose clock does not tick in that window. A test can now pin the instant
+    // instead of hoping for drift.
+    clock: Clock = Clock.System,
 ): ScreenDataStream<Output> {
     val networkStatusFlow: StateFlow<NetworkStatus> = if (reconnectDebounceMs > 0L) {
         networkMonitor.networkStatusDebouncedState(scope, reconnectDebounceMs)
@@ -502,6 +583,8 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     }
 
     val refreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val forceFreshTrigger = MutableSharedFlow<Unit>(extraBufferCapacity = 1)
+    val forceLatch = ForceFreshLatch()
 
     if (fetchPolicy != FetchPolicy.CACHE_ONLY && reconnectDebounceMs > 0L) {
         scope.launch {
@@ -548,7 +631,12 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
             lastObservedKey = key
             // Re-seed persistedFetchedAt for the new key.
             persistedFetchedAt = fetchedAtRepository.read(currentCacheKey)
-            streamDataForPolicy(key = key, policy = fetchPolicy, isEmpty = isEmpty)
+            streamDataForPolicy(
+                key = key,
+                policy = fetchPolicy,
+                isEmpty = isEmpty,
+                forceFresh = forceLatch.consume(),
+            )
         }
         .map { storeData ->
             val key = currentCacheKey ?: return@map storeData
@@ -560,6 +648,13 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
                 storeData.fetchedAtInstant == null && persistedFetchedAt != null ->
                     storeData.copy(fetchedAtInstant = persistedFetchedAt)
                 else -> storeData
+            }
+            // Offline-local (CACHE_ONLY): no network refresh to carry content across — every
+            // SoT emission is authoritative, so an empty read surfaces as empty (→ Empty),
+            // never a stale-content carry-forward. See the single-key overload.
+            if (fetchPolicy == FetchPolicy.CACHE_ONLY) {
+                lastContent = enriched
+                return@map enriched
             }
             val carry = lastContent
             if (!enriched.isEmpty) {
@@ -590,38 +685,22 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
     if (fetchPolicy is FetchPolicy.CACHE_FIRST_SWR) {
         scope.launch {
             var lastBand: FreshnessBand? = null
-            var lastFetchNeeded = false
             storeFlow.collect { storeData ->
                 val band = FreshnessBands.bandFor(
-                    now = kotlin.time.Clock.System.now(),
+                    now = clock.now(),
                     lastSyncedAt = storeData.fetchedAtInstant,
                     ttl = ttl,
                     lastError = storeData.error,
                 )
-                // Fire the fetch when the cache is Stale/VeryStale/Initial OR EMPTY.
-                // An empty cache (`isEmpty` — no data yet) ALWAYS needs the first fetch,
-                // even when Store5 stamps a "now" `fetchedAt` on the empty SourceOfTruth
-                // read (which makes `bandFor` return Fresh): freshness is meaningless with
-                // no data. THIS was the on-device hang — every never-synced store emitted
-                // band=Fresh + isEmpty=true and its fetcher never fired, so the offline
-                // layer sat in Loading forever. Edge-detected via `lastFetchNeeded` so it
-                // fires exactly once (data arrives → isEmpty=false → no re-fire; a failed
-                // fetch that stays empty won't thrash — refresh()/retry()/reconnect re-fire
-                // through refreshTrigger).
-                // Gate on ONLINE: never launch a doomed fetch when there's no usable network.
-                // Offline + empty already renders NoNetwork via DecisionEngine; firing a fetch that
-                // can't reach the server just hangs (no data, no error) — and if the monitor is
-                // momentarily 'Available' the screen would sit on Loading forever waiting for it.
-                // The reconnect trigger (Unavailable→Available) re-emits storeFlow and re-fires this
-                // gate once the network is back, so nothing is lost.
+                val isStale = band == FreshnessBand.Stale || band == FreshnessBand.VeryStale
+                val wasStale = lastBand == FreshnessBand.Stale || lastBand == FreshnessBand.VeryStale
+                // Gate the SWR revalidation on ONLINE: never fire a doomed background fetch
+                // while offline (or on a falsely-'Available' no-plan / captive-portal link). This
+                // side-fetch is already decoupled from rendering, so offline it only wastes a
+                // guaranteed-to-fail network attempt (and can leave a spurious error stamp). The
+                // reconnect trigger re-emits storeFlow, so the gate re-fires once the network is back.
                 val isOnline = networkStatusFlow.value is NetworkStatus.Available
-                val fetchNeeded = isOnline && (
-                    band == FreshnessBand.Stale ||
-                        band == FreshnessBand.VeryStale ||
-                        band == FreshnessBand.Initial ||
-                        storeData.isEmpty
-                    )
-                if (fetchNeeded && !lastFetchNeeded) {
+                if (isOnline && isStale && !wasStale) {
                     val revalidateKey = lastObservedKey
                     val revalidateCacheKey = currentCacheKey
                     if (revalidateKey != null && revalidateCacheKey != null) {
@@ -654,7 +733,6 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
                     }
                 }
                 lastBand = band
-                lastFetchNeeded = fetchNeeded
             }
         }
     }
@@ -663,10 +741,14 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
         storeFlow,
         networkStatusFlow,
     ) { storeData, status ->
-        DecisionEngine.decide(storeData, status)
+        DecisionEngine.decide(storeData, status, fetchPolicy)
     }.onStart {
         val current = networkStatusFlow.value
-        if (current !is NetworkStatus.Available) {
+        // Pre-emit NoNetwork so an offline screen shows it instead of a Loading flash — EXCEPT for the
+        // offline-first [FetchPolicy.CACHE_FIRST_SWR], which lets the DecisionEngine decide from the
+        // first storeFlow emission (Content for cached data, Empty for genuinely-no-data) so it never
+        // flashes the blocking NoNetwork state offline. Matches the DecisionEngine offline-empty rule.
+        if (current !is NetworkStatus.Available && fetchPolicy != FetchPolicy.CACHE_FIRST_SWR) {
             emit(ScreenState.NoNetwork(isCaptivePortal = current is NetworkStatus.CaptivePortal))
         }
     }
@@ -683,6 +765,8 @@ fun <Key : Any, Output : Any> Store<Key, Output>.asScreenStream(
         state = screenStateFlow,
         freshness = freshnessFlow,
         refreshTrigger = refreshTrigger,
+        forceFreshTrigger = forceFreshTrigger,
+        forceLatch = forceLatch,
         userRefreshDebounceMs = userRefreshDebounceMs,
     )
 }

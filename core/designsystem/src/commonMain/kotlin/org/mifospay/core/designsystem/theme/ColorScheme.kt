@@ -11,7 +11,7 @@ package org.mifospay.core.designsystem.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import template.core.base.designsystem.toKptColorScheme
+import kpt.core.base.designsystem.toKptColorScheme
 
 // private val LightDefaultColorScheme = lightColorScheme(
 //    primary = md_theme_light_primary,

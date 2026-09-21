@@ -14,23 +14,22 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            // The generic NotificationScheduler<T : NotificationRequest> contract lives in
-            // core-base/platform — BillReminderSchedule implements NotificationRequest from
-            // there, so consumers only see the typed domain payload.
+            // Encapsulation-compliant re-export boundary (G-CORE-BASE-ENCAP): app-shell modules
+            // (cmp-navigation / cmp-shared / cmp-android) reach the core-base/platform surface —
+            // platformModule, GarbageCollectionManager, tryCollect — through core/ (never core-base
+            // directly). `api` so those symbols are visible transitively.
+            //
+            // Fork-owned platform-specific code (expect/actual bridges a fork adds) also belongs here.
+            // The bill-reminder scheduler that previously lived in this module migrated to feature/bills
+            // + the cross-platform sync worker infra (worker-kmp + KMPNotifier) — see sync/WorkScheduler.kt.
             api(projects.coreBase.platform)
-
-            implementation(libs.kotlinx.coroutines.core)
-        }
-
-        androidMain.dependencies {
-            // Bill-reminder notification scheduling — WorkManager + NotificationCompat power
-            // the Android actual of kpt.core.platform.notification.bill.BillReminderScheduler.
-            implementation(libs.androidx.work.ktx)
-            implementation(libs.androidx.core.ktx)
-
-            // koin-android exposes androidContext() for Koin scope wiring in
-            // notification/bill/di/NotificationModule.android.kt.
-            implementation(libs.koin.android)
         }
     }
 }
+
+// ── Fork-owned dependency seam (white-label, mirrors `feature-deps.gradle.kts`) ────────────────
+// A fork adds its OWN dependencies for this module in `core/platform/module-deps.gradle.kts` — never in
+// this file. That is what lets THIS build file be `owner: template` and FULL-COPY on a template
+// sync: the fork's deps live in a file the sync never touches, so a template plugin/version bump
+// can no longer drop them and no 3-way merge is needed.
+project.file("module-deps.gradle.kts").takeIf { it.exists() }?.let { apply(from = it) }

@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.auth.generated.resources.Res
 import mifos_pay.feature.auth.generated.resources.feature_auth_create_an_account
 import mifos_pay.feature.auth.generated.resources.feature_auth_or
@@ -38,7 +39,6 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.component.MifosTopAppBar
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.MifosTheme
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun SignupMethodScreen(

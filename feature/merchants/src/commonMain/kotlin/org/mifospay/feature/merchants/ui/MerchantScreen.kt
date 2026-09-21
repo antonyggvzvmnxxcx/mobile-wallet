@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.merchants.generated.resources.Res
 import mifos_pay.feature.merchants.generated.resources.feature_merchants_empty_no_merchants_subtitle
 import mifos_pay.feature.merchants.generated.resources.feature_merchants_empty_no_merchants_title
@@ -54,7 +55,6 @@ import org.mifospay.core.ui.MifosSearchBar
 import org.mifospay.feature.merchants.MerchantUiState
 import org.mifospay.feature.merchants.MerchantViewModel
 import org.mifospay.feature.merchants.navigation.navigateToMerchantTransferScreen
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun MerchantScreen(

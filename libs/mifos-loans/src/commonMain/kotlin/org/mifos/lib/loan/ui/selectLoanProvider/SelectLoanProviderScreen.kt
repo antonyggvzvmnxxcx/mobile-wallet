@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.libs.mifos_loans.generated.resources.Res
 import mifos_pay.libs.mifos_loans.generated.resources.feature_select_loan_provider_choose_provider
 import mifos_pay.libs.mifos_loans.generated.resources.feature_select_loan_provider_top_bar_title
@@ -30,7 +31,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.mifospay.core.designsystem.component.MifosCard
 import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Entry point for the Select Loan Provider screen — the new first step of the loan-application

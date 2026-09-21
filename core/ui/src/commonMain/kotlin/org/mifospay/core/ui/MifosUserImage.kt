@@ -17,8 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
+import kpt.core.base.designsystem.theme.KptTheme
 import org.mifospay.core.designsystem.component.MifosTextUserImage
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun MifosUserImage(

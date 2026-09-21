@@ -28,12 +28,8 @@ kotlin {
             // compose-resources — for stringResource()-based ScreenState copy (i18n).
             implementation(compose.components.resources)
 
-            // Fork-specific: Phase-4 Batch-A pilots need DateHelper (core/common) for
-            // parsing Fineract's List<Int> submitted-on-date into an epoch-millis SINCE
-            // cursor at the store fetcher's writer boundary. core/model uses core/common
-            // with `implementation` (no transitive export), so we depend explicitly.
-            implementation(projects.core.common)
             implementation(projects.core.database)
+            implementation(projects.coreBase.database)
             implementation(projects.core.model)
             implementation(projects.core.network)
             implementation(libs.cmp.network.monitor)
@@ -49,3 +45,10 @@ compose.resources {
     generateResClass = always
     packageOfResClass = "kpt.core.store.generated.resources"
 }
+
+// ── Fork-owned dependency seam (white-label, mirrors `feature-deps.gradle.kts`) ────────────────
+// A fork adds its OWN dependencies for this module in `core/store/module-deps.gradle.kts` — never in
+// this file. That is what lets THIS build file be `owner: template` and FULL-COPY on a template
+// sync: the fork's deps live in a file the sync never touches, so a template plugin/version bump
+// can no longer drop them and no 3-way merge is needed.
+project.file("module-deps.gradle.kts").takeIf { it.exists() }?.let { apply(from = it) }

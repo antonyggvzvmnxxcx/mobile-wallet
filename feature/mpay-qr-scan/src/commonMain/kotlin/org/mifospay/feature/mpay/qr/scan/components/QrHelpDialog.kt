@@ -22,13 +22,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr_scan.generated.resources.Res
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_help_description
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_help_title
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_ok
 import org.jetbrains.compose.resources.stringResource
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun QrHelpDialog(
@@ -74,7 +74,7 @@ fun QrHelpDialog(
 @Composable
 @org.jetbrains.compose.ui.tooling.preview.Preview
 private fun QrHelpDialogPreview() {
-    template.core.base.designsystem.KptMaterialTheme {
+    kpt.core.base.designsystem.KptMaterialTheme {
         QrHelpDialog(
             onDismiss = {},
         )

@@ -20,6 +20,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr.generated.resources.Res
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_download_qr
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_share_qr
@@ -27,8 +29,6 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.component.MifosOutlinedButton
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Row of outlined buttons for QR actions:

@@ -63,6 +63,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import kpt.core.base.designsystem.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.core_ui_add_to_pocket_message
 import kpt.core.ui.generated.resources.core_ui_add_to_pocket_title
 import kpt.core.ui.generated.resources.core_ui_error
@@ -94,7 +96,7 @@ import org.mifospay.core.designsystem.component.MifosDialogBox
 import org.mifospay.core.designsystem.component.MifosTextField
 import org.mifospay.core.designsystem.component.MifosTopBar
 import org.mifospay.core.designsystem.icon.MifosIcons
-import org.mifospay.core.network.model.entity.templates.account.AccountOption
+import org.mifospay.core.model.network.entity.templates.account.AccountOption
 import org.mifospay.core.ui.AvatarBox
 import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.ErrorBottomSheet
@@ -102,8 +104,6 @@ import org.mifospay.core.ui.ErrorType
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.MifosProgressIndicatorOverlay
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.KptTheme
-import template.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.Res as UiRes
 
 /**

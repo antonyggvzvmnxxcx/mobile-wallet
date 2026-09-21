@@ -18,9 +18,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import org.mifospay.core.designsystem.component.MifosTab
 import org.mifospay.core.ui.utility.TabContent
-import template.core.base.designsystem.theme.KptTheme
 
 @Suppress("MultipleEmitters")
 @Composable

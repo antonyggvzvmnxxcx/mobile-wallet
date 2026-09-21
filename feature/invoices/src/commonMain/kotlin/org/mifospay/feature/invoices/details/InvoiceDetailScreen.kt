@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.invoices.generated.resources.Res
 import mifos_pay.feature.invoices.generated.resources.feature_invoices_amount
 import mifos_pay.feature.invoices.generated.resources.feature_invoices_consumer_id
@@ -50,7 +51,6 @@ import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.invoices.details.InvoiceDetailState.ViewState.Content
 import org.mifospay.feature.invoices.details.InvoiceDetailState.ViewState.Error
 import org.mifospay.feature.invoices.details.InvoiceDetailState.ViewState.Loading
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun InvoiceDetailScreen(

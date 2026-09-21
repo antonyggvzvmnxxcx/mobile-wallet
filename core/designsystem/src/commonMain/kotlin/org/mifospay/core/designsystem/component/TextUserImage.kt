@@ -21,7 +21,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import template.core.base.designsystem.theme.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun MifosTextUserImage(

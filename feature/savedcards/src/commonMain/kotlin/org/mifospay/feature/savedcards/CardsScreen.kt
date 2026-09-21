@@ -45,6 +45,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.base.store.screen.ScreenState
 import kpt.core.base.ui.screen.ScreenContent
 import org.jetbrains.compose.resources.getString
@@ -63,7 +64,6 @@ import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.savedcards.createOrUpdate.CardAddEditType
 import org.mifospay.feature.savedcards.utils.CreditCardUtils.detectCardType
 import org.mifospay.feature.savedcards.utils.CreditCardUtils.maskCreditCardNumber
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Known Issue, On deleting card, state isn't updating automatically

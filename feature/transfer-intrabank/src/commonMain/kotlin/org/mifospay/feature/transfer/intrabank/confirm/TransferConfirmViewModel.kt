@@ -46,11 +46,11 @@ import org.mifospay.core.data.repository.PocketRepository
 import org.mifospay.core.data.repository.ThirdPartyTransferRepository
 import org.mifospay.core.data.repository.UserVerificationRepository
 import org.mifospay.core.model.enums.AccountType
+import org.mifospay.core.model.network.entity.payload.TransferPayload
+import org.mifospay.core.model.network.entity.templates.account.AccountOption
 import org.mifospay.core.model.pocket.DetailedPocketAccount
 import org.mifospay.core.model.pocket.PocketAccount
 import org.mifospay.core.model.savingsaccount.SavingAccountEntity
-import org.mifospay.core.network.model.entity.payload.TransferPayload
-import org.mifospay.core.network.model.entity.templates.account.AccountOption
 import org.mifospay.core.ui.DefaultErrorMessageProvider
 import org.mifospay.core.ui.utils.BaseViewModel
 import org.mifospay.feature.transfer.intrabank.navigation.TransferConfirmRoute

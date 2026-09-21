@@ -19,7 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import template.core.base.designsystem.theme.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun ContactNotFoundLoading(

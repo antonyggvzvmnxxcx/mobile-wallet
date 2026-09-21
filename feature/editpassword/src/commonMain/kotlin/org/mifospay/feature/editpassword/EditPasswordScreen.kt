@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.editpassword.generated.resources.Res
 import mifos_pay.feature.editpassword.generated.resources.feature_editpassword_change_password
 import mifos_pay.feature.editpassword.generated.resources.feature_editpassword_confirm_new_password
@@ -49,7 +50,6 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.ui.MifosPasswordField
 import org.mifospay.core.ui.PasswordStrengthIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun EditPasswordScreen(

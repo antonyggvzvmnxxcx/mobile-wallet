@@ -40,6 +40,7 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.auth.generated.resources.Res
 import mifos_pay.feature.auth.generated.resources.feature_auth_address_line_1
 import mifos_pay.feature.auth.generated.resources.feature_auth_address_line_2
@@ -73,7 +74,6 @@ import org.mifospay.core.ui.ExposedDropdownBox
 import org.mifospay.core.ui.MifosPasswordField
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.auth.signup.SignUpState.DialogState
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun SignupScreen(

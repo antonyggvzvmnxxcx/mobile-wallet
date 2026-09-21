@@ -22,6 +22,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr.generated.resources.Res
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_account_ids
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_account_number
@@ -30,8 +32,6 @@ import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_external_id
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Section showing copyable account identifiers:

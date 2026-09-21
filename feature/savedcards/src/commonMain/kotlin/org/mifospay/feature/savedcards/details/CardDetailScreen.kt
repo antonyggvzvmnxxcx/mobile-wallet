@@ -38,6 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.savedcards.generated.resources.Res
 import mifos_pay.feature.savedcards.generated.resources.feature_savedcards_error_oops
 import mifos_pay.feature.savedcards.generated.resources.feature_savedcards_subtitle
@@ -52,7 +53,6 @@ import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.savedcards.components.CreditCard
 import org.mifospay.feature.savedcards.utils.CardMaskStyle
 import org.mifospay.feature.savedcards.utils.CreditCardUtils.maskCreditCardNumber
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun CardDetailScreen(

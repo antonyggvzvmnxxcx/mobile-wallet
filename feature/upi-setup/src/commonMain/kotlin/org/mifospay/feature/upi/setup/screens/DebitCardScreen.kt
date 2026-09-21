@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import org.mifospay.core.designsystem.theme.MifosTheme
@@ -27,7 +28,6 @@ import org.mifospay.core.ui.MifosProgressIndicatorOverlay
 import org.mifospay.core.ui.VerifyStepHeader
 import org.mifospay.feature.upi.setup.viewmodel.DebitCardUiState
 import org.mifospay.feature.upi.setup.viewmodel.DebitCardViewModel
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun DebitCardScreen(

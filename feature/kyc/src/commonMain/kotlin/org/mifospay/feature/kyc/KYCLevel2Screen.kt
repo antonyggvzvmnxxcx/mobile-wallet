@@ -40,6 +40,7 @@ import coil3.compose.SubcomposeAsyncImage
 import coil3.compose.SubcomposeAsyncImageContent
 import coil3.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.kyc.generated.resources.Res
 import mifos_pay.feature.kyc.generated.resources.feature_kyc_file_name
 import mifos_pay.feature.kyc.generated.resources.feature_kyc_submit
@@ -57,7 +58,6 @@ import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.ui.AvatarBox
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun KYCLevel2Screen(

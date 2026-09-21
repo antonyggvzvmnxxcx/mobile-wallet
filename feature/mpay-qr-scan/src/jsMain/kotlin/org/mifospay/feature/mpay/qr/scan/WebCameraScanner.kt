@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.browser.document
 import kotlinx.coroutines.await
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr_scan.generated.resources.Res
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_camera_access_denied
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_camera_denied_message
@@ -54,7 +55,6 @@ import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_select_from
 import org.jetbrains.compose.resources.stringResource
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.w3c.dom.HTMLDivElement
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * State of the web camera scanner.

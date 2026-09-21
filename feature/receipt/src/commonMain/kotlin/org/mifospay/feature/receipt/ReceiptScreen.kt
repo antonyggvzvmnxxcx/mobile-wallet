@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.receipt.generated.resources.Res
 import mifos_pay.feature.receipt.generated.resources.feature_receipt_credited_by
 import mifos_pay.feature.receipt.generated.resources.feature_receipt_paid_to
@@ -53,7 +54,6 @@ import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.core.ui.utils.ShareUtils
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun ReceiptScreenRoute(

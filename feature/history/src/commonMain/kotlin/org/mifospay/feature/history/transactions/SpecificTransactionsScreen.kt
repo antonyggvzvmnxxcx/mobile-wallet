@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.history.generated.resources.Res
 import mifos_pay.feature.history.generated.resources.feature_history_account_number_alter
 import mifos_pay.feature.history.generated.resources.feature_history_amount
@@ -52,7 +53,6 @@ import org.mifospay.core.model.savingsaccount.Transaction
 import org.mifospay.core.ui.ErrorScreenContent
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun SpecificTransactionsScreen(

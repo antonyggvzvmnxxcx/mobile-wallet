@@ -39,6 +39,8 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_intrabank.generated.resources.Res
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_make_transfer_payment_success
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_make_transfer_success
@@ -57,8 +59,6 @@ import org.mifospay.core.designsystem.component.MifosButton
 import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.feature.transfer.intrabank.confirm.TransferResult
-import template.core.base.designsystem.KptTheme
-import template.core.base.designsystem.theme.KptTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable

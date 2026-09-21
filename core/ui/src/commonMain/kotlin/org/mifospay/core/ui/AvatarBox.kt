@@ -24,7 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import template.core.base.designsystem.theme.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun AvatarBox(

@@ -48,6 +48,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.Res
 import kpt.core.ui.generated.resources.core_ui_account_balance
 import kpt.core.ui.generated.resources.core_ui_account_number
@@ -65,7 +66,6 @@ import org.mifospay.core.designsystem.component.MifosBottomSheet
 import org.mifospay.core.designsystem.component.MifosButton
 import org.mifospay.core.model.account.Account
 import org.mifospay.core.model.savingsaccount.TransactionType
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun TransactionFilterBottomSheet(

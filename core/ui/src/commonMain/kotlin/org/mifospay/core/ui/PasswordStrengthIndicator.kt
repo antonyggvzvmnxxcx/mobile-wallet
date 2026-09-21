@@ -46,6 +46,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.Res
 import kpt.core.ui.generated.resources.core_ui_error_icon_description
 import kpt.core.ui.generated.resources.core_ui_password_requirements
@@ -57,7 +58,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.designsystem.theme.toRoundedCornerShape
-import template.core.base.designsystem.theme.KptTheme
 
 @Suppress("LongMethod", "CyclomaticComplexMethod")
 @Composable

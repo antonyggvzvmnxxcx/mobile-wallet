@@ -44,6 +44,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.merchants.generated.resources.Res
 import mifos_pay.feature.merchants.generated.resources.feature_merchants_amount
 import mifos_pay.feature.merchants.generated.resources.feature_merchants_credits
@@ -75,7 +76,6 @@ import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.feature.merchants.MerchantTransferUiState
 import org.mifospay.feature.merchants.MerchantTransferViewModel
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun MerchantTransferScreenRoute(

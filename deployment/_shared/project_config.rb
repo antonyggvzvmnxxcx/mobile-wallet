@@ -131,7 +131,7 @@ module FastlaneConfig
         file:         ENV["ANDROID_STORE_FILE"]    || "upload_keystore.keystore",
         password:     ENV["ANDROID_STORE_PASSWORD"] || "",
         key_alias:    ENV["ANDROID_KEY_ALIAS"]     || "release-key",
-        key_password: ENV["ANDROID_KEY_PASSWORD"]  || "",
+        key_password: ENV["ANDROID_KEY_PASSWORD"]  || ENV["ANDROID_STORE_PASSWORD"] || "",
       },
       firebase: {
         # ENV overrides: FIREBASE_ANDROID_PROD_APP_ID / FIREBASE_ANDROID_DEMO_APP_ID / FIREBASE_GROUPS

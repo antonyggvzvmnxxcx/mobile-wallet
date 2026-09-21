@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.history.generated.resources.Res
 import mifos_pay.feature.history.generated.resources.feature_history_debited_from
 import mifos_pay.feature.history.generated.resources.feature_history_paid_to
@@ -36,7 +37,6 @@ import org.mifospay.core.common.CurrencyFormatter
 import org.mifospay.core.common.DateHelper
 import org.mifospay.core.model.savingsaccount.TransferDetail
 import org.mifospay.core.ui.AvatarBox
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun TransactionDetail(

@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.base.store.screen.ScreenState
 import kpt.core.base.ui.screen.ScreenContent
 import mifos_pay.feature.notification.generated.resources.Res
@@ -40,7 +41,6 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.model.notification.Notification
 import org.mifospay.core.ui.EmptyContentScreen
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun NotificationScreen(

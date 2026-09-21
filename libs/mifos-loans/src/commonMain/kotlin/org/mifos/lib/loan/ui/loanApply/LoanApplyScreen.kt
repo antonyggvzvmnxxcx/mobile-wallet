@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.libs.mifos_loans.generated.resources.Res
 import mifos_pay.libs.mifos_loans.generated.resources.feature_apply_loan_button_continue
 import mifos_pay.libs.mifos_loans.generated.resources.feature_apply_loan_hint_applicant_name
@@ -50,7 +51,6 @@ import org.mifospay.core.ui.ErrorScreenContent
 import org.mifospay.core.ui.ExposedDropdownBox
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Entry point for the Loan Application form.

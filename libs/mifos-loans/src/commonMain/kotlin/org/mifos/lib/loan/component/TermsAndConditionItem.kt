@@ -17,9 +17,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Displays a single terms and conditions entry with a highlighted title and body text.

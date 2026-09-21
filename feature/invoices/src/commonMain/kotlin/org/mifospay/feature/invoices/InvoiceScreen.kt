@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.base.store.screen.ScreenState
 import kpt.core.base.ui.screen.ScreenContent
 import mifos_pay.feature.invoices.generated.resources.Res
@@ -33,7 +34,6 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.model.datatables.invoice.Invoice
 import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun InvoiceScreen(

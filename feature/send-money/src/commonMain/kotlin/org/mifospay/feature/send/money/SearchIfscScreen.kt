@@ -40,6 +40,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.send_money.generated.resources.Res
 import mifos_pay.feature.send_money.generated.resources.feature_send_money_bank_branch
 import mifos_pay.feature.send_money.generated.resources.feature_send_money_bank_name
@@ -57,7 +58,6 @@ import org.mifospay.core.designsystem.component.MifosTextField
 import org.mifospay.core.designsystem.component.MifosTopBar
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 // TODO replace dummy data with actual data or call API
 // TODO fix bank name input box visibility

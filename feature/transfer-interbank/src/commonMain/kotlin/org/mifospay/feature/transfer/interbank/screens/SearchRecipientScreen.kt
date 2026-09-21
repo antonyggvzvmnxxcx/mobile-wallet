@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_interbank.generated.resources.Res
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_bank
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_enter_phone_number
@@ -53,7 +54,6 @@ import org.mifospay.core.model.interbank.InterBankPartyInfoResponse
 import org.mifospay.core.ui.AvatarBox
 import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.MifosProgressIndicator
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun SearchRecipientScreen(

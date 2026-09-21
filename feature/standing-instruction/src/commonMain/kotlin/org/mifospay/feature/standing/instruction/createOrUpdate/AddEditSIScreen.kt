@@ -52,6 +52,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.standing_instruction.generated.resources.Res
 import mifos_pay.feature.standing_instruction.generated.resources.feature_standing_instruction_error_oops
 import org.jetbrains.compose.resources.getString
@@ -76,7 +77,6 @@ import org.mifospay.core.ui.ExposedDropdownBox
 import org.mifospay.core.ui.MifosDivider
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun AddEditSIScreen(

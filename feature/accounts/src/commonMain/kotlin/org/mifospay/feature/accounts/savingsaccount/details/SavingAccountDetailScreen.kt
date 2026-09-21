@@ -50,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.accounts.generated.resources.Res
 import mifos_pay.feature.accounts.generated.resources.feature_accounts_detail_account_balance
 import mifos_pay.feature.accounts.generated.resources.feature_accounts_detail_account_details
@@ -80,7 +81,6 @@ import org.mifospay.core.ui.TransactionHistoryCard
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.accounts.SavingAccountStatus
 import org.mifospay.feature.accounts.color
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun SavingAccountDetailScreen(

@@ -44,8 +44,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun MifosOutlinedTextField(

@@ -47,10 +47,10 @@ import androidx.compose.ui.node.invalidateDraw
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
+import kpt.core.base.designsystem.theme.KptTheme
 import org.mifospay.core.designsystem.component.scrollbar.ThumbState.Active
 import org.mifospay.core.designsystem.component.scrollbar.ThumbState.Dormant
 import org.mifospay.core.designsystem.component.scrollbar.ThumbState.Inactive
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * The time period for showing the scrollbar thumb after interacting with it, before it fades away

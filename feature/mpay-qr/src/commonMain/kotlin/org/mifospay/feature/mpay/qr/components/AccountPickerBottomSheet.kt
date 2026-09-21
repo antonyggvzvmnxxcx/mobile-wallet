@@ -28,6 +28,8 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr.generated.resources.Res
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_has_external_id
 import mifos_pay.feature.mpay_qr.generated.resources.feature_mpay_qr_no_external_id
@@ -38,8 +40,6 @@ import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.model.account.Account
 import org.mifospay.core.model.savingsaccount.Currency
 import org.mifospay.core.model.savingsaccount.Status
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Bottom sheet for selecting an account for QR code generation.

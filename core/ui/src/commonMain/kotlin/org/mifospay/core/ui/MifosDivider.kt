@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import template.core.base.designsystem.theme.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun MifosDivider(

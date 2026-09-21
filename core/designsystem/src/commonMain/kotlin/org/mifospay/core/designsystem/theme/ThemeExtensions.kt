@@ -12,7 +12,7 @@ package org.mifospay.core.designsystem.theme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import template.core.base.designsystem.core.KptShapes
+import kpt.core.base.designsystem.core.KptShapes
 
 /**
  * Converts the given corner values into a [RoundedCornerShape].

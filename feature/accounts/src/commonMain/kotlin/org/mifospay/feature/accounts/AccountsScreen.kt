@@ -46,6 +46,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.accounts.generated.resources.Res
 import mifos_pay.feature.accounts.generated.resources.baseline_check
 import mifos_pay.feature.accounts.generated.resources.baseline_unchecked
@@ -91,7 +92,6 @@ import org.mifospay.core.ui.rememberRevealState
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.accounts.savingsaccount.SavingsAddEditType
 import org.mifospay.feature.beneficiary.addupdatebeneficiary.BeneficiaryAddEditType
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun AccountsScreen(

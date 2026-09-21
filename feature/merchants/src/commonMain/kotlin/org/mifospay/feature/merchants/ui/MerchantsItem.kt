@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.merchants.generated.resources.Res
 import mifos_pay.feature.merchants.generated.resources.feature_merchants_ic_bank
 import org.jetbrains.compose.resources.painterResource
@@ -31,7 +32,6 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.component.MifosCard
 import org.mifospay.core.designsystem.theme.styleMedium16sp
 import org.mifospay.core.model.savingsaccount.SavingsWithAssociationsEntity
-import template.core.base.designsystem.theme.KptTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

@@ -47,6 +47,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.github.alexzhirkevich.qrose.ImageFormat
 import io.github.alexzhirkevich.qrose.rememberQrCodePainter
 import io.github.alexzhirkevich.qrose.toByteArray
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.core_ui_add_to_pocket_message
 import kpt.core.ui.generated.resources.core_ui_add_to_pocket_title
 import kpt.core.ui.generated.resources.core_ui_error
@@ -82,8 +84,6 @@ import org.mifospay.feature.mpay.qr.components.InterBankPlaceholder
 import org.mifospay.feature.mpay.qr.components.QrActionButtons
 import org.mifospay.feature.mpay.qr.components.QrCodeCard
 import org.mifospay.feature.mpay.qr.components.QrType
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.Res as UiRes
 
 @Composable

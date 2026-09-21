@@ -327,7 +327,7 @@ private sealed interface PendingAmountConfirmation {
 @Composable
 @org.jetbrains.compose.ui.tooling.preview.Preview
 private fun FastMpayScreenPreview() {
-    template.core.base.designsystem.KptMaterialTheme {
+    kpt.core.base.designsystem.KptMaterialTheme {
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center,

@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.libs.mifos_loans.generated.resources.Res
 import mifos_pay.libs.mifos_loans.generated.resources.feature_select_loan_type_choose_loan
 import mifos_pay.libs.mifos_loans.generated.resources.feature_select_loan_type_empty
@@ -35,7 +36,6 @@ import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.ErrorScreenContent
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Entry point for the Loan Type Selection screen.

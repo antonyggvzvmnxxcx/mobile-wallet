@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.payments.generated.resources.Res
 import mifos_pay.feature.payments.generated.resources.feature_payments_inter_bank_transfer_description
 import mifos_pay.feature.payments.generated.resources.feature_payments_inter_bank_transfer_title
@@ -47,7 +48,6 @@ import org.mifospay.core.designsystem.component.MifosCard
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.ui.AvatarBox
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun SelectTransferTypeScreen(

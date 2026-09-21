@@ -48,6 +48,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.base.store.screen.ScreenState
 import kpt.core.base.ui.screen.ScreenContent
 import org.jetbrains.compose.resources.getString
@@ -69,7 +70,6 @@ import org.mifospay.core.ui.rememberRevealState
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.standing.instruction.components.FrequencyChip
 import org.mifospay.feature.standing.instruction.createOrUpdate.SIAddEditType
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun StandingInstructionsScreen(

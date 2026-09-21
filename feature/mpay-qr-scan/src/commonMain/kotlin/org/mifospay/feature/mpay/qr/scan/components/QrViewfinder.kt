@@ -35,10 +35,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr_scan.generated.resources.Res
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_viewfinder
 import org.jetbrains.compose.resources.stringResource
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun QrViewfinder(
@@ -212,7 +212,7 @@ fun QrViewfinder(
 @Composable
 @org.jetbrains.compose.ui.tooling.preview.Preview
 private fun QrViewfinderPreview() {
-    template.core.base.designsystem.KptMaterialTheme {
+    kpt.core.base.designsystem.KptMaterialTheme {
         QrViewfinder()
     }
 }

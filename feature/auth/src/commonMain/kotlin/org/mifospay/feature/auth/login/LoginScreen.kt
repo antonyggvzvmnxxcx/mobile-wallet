@@ -34,6 +34,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.base.platform.PlatformBuildConfig
 import mifos_pay.feature.auth.generated.resources.Res
 import mifos_pay.feature.auth.generated.resources.feature_auth_connected_to
@@ -55,7 +56,6 @@ import org.mifospay.core.designsystem.theme.styleNormal18sp
 import org.mifospay.core.ui.MifosPasswordField
 import org.mifospay.core.ui.MifosProgressIndicatorOverlay
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 import template.core.base.ui.detectMultiTapGesture
 
 @Composable

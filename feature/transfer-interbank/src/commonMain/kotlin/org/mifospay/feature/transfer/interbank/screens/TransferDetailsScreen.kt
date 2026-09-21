@@ -36,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_interbank.generated.resources.Res
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_amount
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_available_balance
@@ -62,7 +63,6 @@ import org.mifospay.core.model.interbank.InterBankPartyInfoResponse
 import org.mifospay.core.model.savingsaccount.Currency
 import org.mifospay.core.model.savingsaccount.Status
 import org.mifospay.core.ui.AmountEditText
-import template.core.base.designsystem.theme.KptTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

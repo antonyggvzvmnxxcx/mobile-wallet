@@ -46,6 +46,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_intrabank.generated.resources.Res
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_select_account_placeholder
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_select_payment_title
@@ -67,14 +69,12 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.component.MifosTopBar
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.toRoundedCornerShape
-import org.mifospay.core.network.model.entity.templates.account.AccountOption
+import org.mifospay.core.model.network.entity.templates.account.AccountOption
 import org.mifospay.core.ui.AvatarBox
 import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.SimpleSearchBar
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.KptTheme
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun SelectPayeeScreen(

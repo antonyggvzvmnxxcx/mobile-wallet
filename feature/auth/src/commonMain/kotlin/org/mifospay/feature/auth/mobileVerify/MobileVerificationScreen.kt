@@ -27,6 +27,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.auth.generated.resources.Res
 import mifos_pay.feature.auth.generated.resources.feature_auth_enter_mobile_number
 import mifos_pay.feature.auth.generated.resources.feature_auth_enter_mobile_number_description
@@ -50,7 +51,6 @@ import org.mifospay.core.designsystem.component.NavigationIcon
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun MobileVerificationScreen(

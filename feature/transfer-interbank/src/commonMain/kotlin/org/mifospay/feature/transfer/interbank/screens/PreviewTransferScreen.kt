@@ -36,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_interbank.generated.resources.Res
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_acknowledgement_section
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_amount
@@ -64,7 +65,6 @@ import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.model.interbank.InterBankPartyInfoResponse
 import org.mifospay.core.ui.AvatarBox
 import org.mifospay.core.ui.MifosProgressIndicatorOverlay
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun PreviewTransferScreen(

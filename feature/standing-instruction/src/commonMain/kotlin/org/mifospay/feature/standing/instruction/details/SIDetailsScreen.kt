@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.standing_instruction.generated.resources.Res
 import mifos_pay.feature.standing_instruction.generated.resources.feature_standing_instruction_error_oops
 import org.jetbrains.compose.resources.stringResource
@@ -47,7 +48,6 @@ import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.standing.instruction.components.FrequencyChip
 import org.mifospay.feature.standing.instruction.components.InstructionTypeChip
 import org.mifospay.feature.standing.instruction.components.PriorityChip
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun SIDetailsScreen(

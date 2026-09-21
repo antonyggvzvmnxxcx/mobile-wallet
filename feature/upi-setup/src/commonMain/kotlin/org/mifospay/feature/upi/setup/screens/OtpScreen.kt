@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.upi_setup.generated.resources.Res
 import mifos_pay.feature.upi_setup.generated.resources.feature_upi_setup_enter_otp
 import org.jetbrains.compose.resources.stringResource
@@ -30,7 +31,6 @@ import org.mifospay.core.ui.OtpTextField
 import org.mifospay.core.ui.VerifyStepHeader
 import org.mifospay.feature.upi.setup.viewmodel.OtpRequestState
 import org.mifospay.feature.upi.setup.viewmodel.OtpVerifyState
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Real server-verified OTP step — [otpRequestState] reflects whether the code was actually

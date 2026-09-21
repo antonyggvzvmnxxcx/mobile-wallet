@@ -30,6 +30,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_intrabank.generated.resources.Res
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_select_account_placeholder
 import mifos_pay.feature.transfer_intrabank.generated.resources.feature_send_money_see_all
@@ -51,8 +53,6 @@ import org.mifospay.feature.transfer.intrabank.hub.components.EmptyBeneficiaries
 import org.mifospay.feature.transfer.intrabank.hub.components.EmptyRecentsState
 import org.mifospay.feature.transfer.intrabank.hub.components.QuickActionsGrid
 import org.mifospay.feature.transfer.intrabank.hub.components.RecentPayeeCard
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun IntraBankHubScreen(

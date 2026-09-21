@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cmp.shared.generated.resources.upi_and_autopay
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.payments.generated.resources.Res
 import mifos_pay.feature.payments.generated.resources.feature_payments_inter_bank_transfer_description
 import mifos_pay.feature.payments.generated.resources.feature_payments_inter_bank_transfer_title
@@ -37,7 +38,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.mifospay.core.designsystem.component.MifosBottomSheet
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.shared.TransferOptionsViewModel
-import template.core.base.designsystem.theme.KptTheme
 import cmp.shared.generated.resources.Res as SharedRes
 
 @Composable

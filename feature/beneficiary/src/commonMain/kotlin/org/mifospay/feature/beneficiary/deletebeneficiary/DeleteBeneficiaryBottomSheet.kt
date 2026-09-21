@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.beneficiary.generated.resources.Res
 import mifos_pay.feature.beneficiary.generated.resources.feature_beneficiary_cancel
 import mifos_pay.feature.beneficiary.generated.resources.feature_beneficiary_delete
@@ -41,7 +42,6 @@ import org.jetbrains.compose.resources.stringResource
 import org.mifospay.core.designsystem.component.MifosBottomSheet
 import org.mifospay.core.designsystem.component.MifosButton
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Bottom sheet composable for delete beneficiary flow.

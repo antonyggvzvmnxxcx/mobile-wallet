@@ -28,6 +28,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.libs.mifos_loans.generated.resources.Res
 import mifos_pay.libs.mifos_loans.generated.resources.feature_apply_loan_info_confirm_details
 import mifos_pay.libs.mifos_loans.generated.resources.feature_apply_loan_status_success
@@ -42,7 +43,6 @@ import org.mifospay.core.designsystem.component.MifosScaffold
 import org.mifospay.core.designsystem.component.MifosTopBar
 import org.mifospay.core.ui.MifosProgressIndicatorOverlay
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * Entry point for the Confirm Details screen — the final step of the loan-application wizard.

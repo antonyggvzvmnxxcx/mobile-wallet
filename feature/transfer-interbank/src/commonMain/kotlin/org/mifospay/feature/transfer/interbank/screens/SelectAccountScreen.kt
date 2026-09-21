@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.transfer_interbank.generated.resources.Res
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_account
 import mifos_pay.feature.transfer_interbank.generated.resources.feature_send_interbank_account_type
@@ -50,13 +51,12 @@ import org.mifospay.core.designsystem.component.MifosTopBar
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.model.account.Account
+import org.mifospay.core.model.network.entity.templates.account.AccountType
 import org.mifospay.core.model.savingsaccount.Currency
 import org.mifospay.core.model.savingsaccount.Status
-import org.mifospay.core.network.model.entity.templates.account.AccountType
 import org.mifospay.core.ui.AvatarBox
 import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.MifosProgressIndicator
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun SelectAccountScreen(

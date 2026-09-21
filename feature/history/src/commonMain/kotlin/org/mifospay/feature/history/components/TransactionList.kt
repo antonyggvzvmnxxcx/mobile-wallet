@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.core_ui_money_in
 import kpt.core.ui.generated.resources.core_ui_money_out
 import mifos_pay.feature.history.generated.resources.Res
@@ -48,7 +49,6 @@ import org.mifospay.core.common.CurrencyFormatter
 import org.mifospay.core.model.savingsaccount.Transaction
 import org.mifospay.core.model.savingsaccount.TransactionType
 import org.mifospay.feature.history.HistoryAction
-import template.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.Res as UiRes
 
 @Composable

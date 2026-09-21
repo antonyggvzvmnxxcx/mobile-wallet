@@ -36,17 +36,17 @@ object DecisionEngine {
      * @param storeData snapshot from the Store pipeline (data, error, freshness flags)
      * @param networkStatus current connectivity; [NetworkStatus.CaptivePortal] is treated
      *   as offline for content decisions but surfaces a distinct UI flag
-     * @param fetchPolicy informational only — surfaced so callers can pass-through the
-     *   policy that drove the upstream Store5 request shape for telemetry / debug logging.
-     *   The case mapping below is **purely** a function of `(storeData, networkStatus)`;
-     *   policy-specific behaviour materialises at the stream layer
-     *   (see `streamDataForPolicy` in `StoreDataExtensions.kt`), not inside this decider.
+     * @param fetchPolicy the policy that drove the upstream Store5 request shape. Consumed for
+     *   ONE terminal-emptiness decision: a [FetchPolicy.CACHE_ONLY] (offline-local, no fetcher)
+     *   store maps its "no data" state to [ScreenState.Empty] rather than [ScreenState.Loading],
+     *   because there is no network fetch that could ever fill it. Every other mapping is a pure
+     *   function of `(storeData, networkStatus)`; remaining policy-specific behaviour materialises
+     *   at the stream layer (see `streamDataForPolicy` in `StoreDataExtensions.kt`).
      * @return the [ScreenState] variant the screen should render
      */
     fun <T> decide(
         storeData: StoreData<T>,
         networkStatus: NetworkStatus,
-        @Suppress("UNUSED_PARAMETER")
         fetchPolicy: FetchPolicy = FetchPolicy.NETWORK_WITH_CACHE,
     ): ScreenState<T> {
         val noData = storeData.isEmpty
@@ -54,26 +54,10 @@ object DecisionEngine {
         val isOnline = networkStatus is NetworkStatus.Available
         val isCaptivePortal = networkStatus is NetworkStatus.CaptivePortal
 
-        // === No data branch ===
-        if (noData) {
-            return when {
-                isCaptivePortal -> ScreenState.NoNetwork(isCaptivePortal = true)
-                !isOnline -> ScreenState.NoNetwork()
-                error != null -> when (categorize(error)) {
-                    ErrorCategory.Network, ErrorCategory.Timeout.Connect, ErrorCategory.Timeout.Read ->
-                        ScreenState.NoNetwork()
-                    ErrorCategory.Auth -> ScreenState.Unauthenticated
-                    ErrorCategory.RateLimit,
-                    ErrorCategory.QuotaExceeded,
-                    ErrorCategory.Generic,
-                    is ErrorCategory.Server,
-                    is ErrorCategory.ClientError,
-                    -> ScreenState.Error(error, isNetworkError = false)
-                }
-                storeData.fetchedAtInstant != null && !storeData.isRefreshing -> ScreenState.Empty
-                else -> ScreenState.Loading
-            }
-        }
+        // === No data branch === (extracted to decideNoData/decideError so each function stays
+        // within the detekt CyclomaticComplexMethod threshold; behaviour is identical to the
+        // inlined when. See those helpers for the full offline-local / offline-first / error rules.)
+        if (noData) return decideNoData(fetchPolicy, error, isOnline, isCaptivePortal)
 
         // === Has data branch ===
         // Phase A of data-freshness-redesign epic (2026-06-17): network state no longer
@@ -94,6 +78,75 @@ object DecisionEngine {
             fetchedAt = fetchedAt,
             freshnessSignal = FreshnessSignal.initial().copy(isRefreshing = storeData.isRefreshing),
         )
+    }
+
+    /**
+     * No-data decision, split out of [decide] to keep each function within the detekt
+     * CyclomaticComplexMethod threshold. Precedence: offline-local terminal-empty → captive portal →
+     * offline-first empty → offline → error category → still-fetching Loading. Behaviour is identical
+     * to the previously-inlined `when`.
+     */
+    private fun <T> decideNoData(
+        fetchPolicy: FetchPolicy,
+        error: Throwable?,
+        isOnline: Boolean,
+        isCaptivePortal: Boolean,
+    ): ScreenState<T> = when {
+        // Offline-local ([CACHE_ONLY]) with no DB error → terminal Empty (no fetcher can ever fill it).
+        fetchPolicy == FetchPolicy.CACHE_ONLY && error == null -> ScreenState.Empty
+        isCaptivePortal -> ScreenState.NoNetwork(isCaptivePortal = true)
+        // OFFLINE-FIRST — a cache-first ([CACHE_FIRST_SWR], asScreenStream's default) screen with no
+        // cached data offline surfaces its own Empty state, not a blocking full-screen NoNetwork.
+        // Other policies (NETWORK_WITH_CACHE / NETWORK_ONLY) still show NoNetwork offline; the
+        // reconnect trigger re-runs this decision once connectivity returns.
+        //
+        // A NETWORK-category error does not disqualify Empty here. The guard used to be
+        // `error == null`, on the assumption that offline CACHE_FIRST_SWR never reaches a fetcher —
+        // but Store5's `cached(key, refresh = false)` DOES invoke the fetcher when nothing is
+        // cached (`refresh = false` means "don't refetch when data exists", not "never fetch").
+        // So an empty cache offline reliably produces a connection failure, and whether that error
+        // or the empty emission arrived first decided the screen: Empty on a fast machine,
+        // NoNetwork on a slow one. That is the very blocking-NoNetwork this rule exists to prevent,
+        // and it was reproducible as a flaky test rather than as the user-facing bug it is.
+        //
+        // Offline, a network error carries no information — it is the expected outcome of a doomed
+        // attempt, so it must not change the verdict. A NON-network error (a serialization or
+        // mapping fault that happens to surface offline) is real signal and still falls through to
+        // [decideError].
+        !isOnline &&
+            fetchPolicy == FetchPolicy.CACHE_FIRST_SWR &&
+            (error == null || error.isExpectedWhenOffline()) -> ScreenState.Empty
+        !isOnline -> ScreenState.NoNetwork()
+        error != null -> decideError(error)
+        else -> ScreenState.Loading
+    }
+
+    /**
+     * Whether [this] is the kind of failure that is GUARANTEED offline and therefore says nothing
+     * about the screen's data.
+     *
+     * Deliberately narrow: only the transport categories. An auth or server error cannot legitimately
+     * originate from an offline device, so if one appears it is real signal and must still surface.
+     */
+    private fun Throwable.isExpectedWhenOffline(): Boolean = when (categorize(this)) {
+        ErrorCategory.Network,
+        ErrorCategory.Timeout.Connect,
+        ErrorCategory.Timeout.Read,
+        -> true
+        else -> false
+    }
+
+    /** Error → ScreenState mapping, split out to keep [decideNoData] within the complexity threshold. */
+    private fun decideError(error: Throwable): ScreenState<Nothing> = when (categorize(error)) {
+        ErrorCategory.Network, ErrorCategory.Timeout.Connect, ErrorCategory.Timeout.Read ->
+            ScreenState.NoNetwork()
+        ErrorCategory.Auth -> ScreenState.Unauthenticated
+        ErrorCategory.RateLimit,
+        ErrorCategory.QuotaExceeded,
+        ErrorCategory.Generic,
+        is ErrorCategory.Server,
+        is ErrorCategory.ClientError,
+        -> ScreenState.Error(error, isNetworkError = false)
     }
 
     /**

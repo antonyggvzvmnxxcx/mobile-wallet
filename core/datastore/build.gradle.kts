@@ -33,14 +33,13 @@ kotlin {
             implementation(libs.multiplatform.settings)
             implementation(libs.multiplatform.settings.serialization)
             implementation(libs.multiplatform.settings.coroutines)
-
-            // Koin DI is used by fork Koin modules (org.koin.core.qualifier.*, org.koin.dsl.*).
-            implementation(libs.koin.core)
-        }
-
-        androidMain.dependencies {
-            // androidContext() extension for KoinApplication (org.koin.android.ext.koin.androidContext).
-            implementation(libs.koin.android)
         }
     }
 }
+
+// ── Fork-owned dependency seam (white-label, mirrors `feature-deps.gradle.kts`) ────────────────
+// A fork adds its OWN dependencies for this module in `core/datastore/module-deps.gradle.kts` — never in
+// this file. That is what lets THIS build file be `owner: template` and FULL-COPY on a template
+// sync: the fork's deps live in a file the sync never touches, so a template plugin/version bump
+// can no longer drop them and no 3-way merge is needed.
+project.file("module-deps.gradle.kts").takeIf { it.exists() }?.let { apply(from = it) }

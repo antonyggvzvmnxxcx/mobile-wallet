@@ -53,6 +53,7 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import cmp.shared.generated.resources.Res
 import cmp.shared.generated.resources.not_connected
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.resources.stringResource
 import org.mifospay.core.data.util.NetworkMonitor
 import org.mifospay.core.data.util.TimeZoneMonitor
@@ -69,7 +70,6 @@ import org.mifospay.feature.profile.navigation.navigateToEditProfile
 import org.mifospay.feature.settings.navigation.navigateToSettings
 import org.mifospay.shared.navigation.MifosNavHost
 import org.mifospay.shared.utils.TopLevelDestination
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun MifosApp(

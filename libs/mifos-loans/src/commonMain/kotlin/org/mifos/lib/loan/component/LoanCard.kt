@@ -24,10 +24,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.mifospay.core.designsystem.component.MifosCard
-import template.core.base.designsystem.theme.KptTheme
 
 /**
  * A compact loan summary card showing title/amount/interest as plain text on a solid

@@ -27,13 +27,13 @@ import coil3.ImageLoader
 import coil3.compose.AsyncImage
 import coil3.compose.LocalPlatformContext
 import coil3.request.ImageRequest
-import mifos_pay.feature.profile.generated.resources.Res
-import mifos_pay.feature.profile.generated.resources.feature_profile_profile_image_description
-import mifos_pay.feature.profile.generated.resources.placeholder
+import kpt.core.base.designsystem.theme.KptTheme
+import kpt.feature.profile.generated.resources.Res
+import kpt.feature.profile.generated.resources.feature_profile_profile_image_description
+import kpt.feature.profile.generated.resources.placeholder
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.mifospay.core.designsystem.icon.MifosIcons
-import template.core.base.designsystem.theme.KptTheme
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 

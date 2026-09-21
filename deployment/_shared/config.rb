@@ -636,7 +636,7 @@ module FastlaneConfig
       key_password:      options[:key_password]      ||
                          ENV["KEY_PASSWORD"]         ||
                          ENV["KEYSTORE_ALIAS_PASSWORD"] ||
-                         props["keyPassword"]        || "",
+                         props["keyPassword"]        || ENV["KEYSTORE_PASSWORD"] || props["storePassword"] || "",
     }
   end
 end
@@ -1330,7 +1330,7 @@ def buildAndSignApp(taskName:, buildType: "Release", **signing_config)
   ENV["KEYSTORE_PATH"]           = keystore_abs
   ENV["KEYSTORE_PASSWORD"]       = signing_config[:keystore_password] || ENV["KEYSTORE_PASSWORD"] || ""
   ENV["KEYSTORE_ALIAS"]          = signing_config[:key_alias]         || ENV["KEYSTORE_ALIAS"] || "release"
-  ENV["KEYSTORE_ALIAS_PASSWORD"] = signing_config[:key_password]      || ENV["KEYSTORE_ALIAS_PASSWORD"] || ""
+  ENV["KEYSTORE_ALIAS_PASSWORD"] = signing_config[:key_password]      || ENV["KEYSTORE_ALIAS_PASSWORD"] || ENV["KEYSTORE_PASSWORD"]
 
   # -p tells Gradle to use repo root as project dir, overriding whatever cwd
   # Fastlane sets (deployment/fastlane/) when running the lane. NO signing on the command line.

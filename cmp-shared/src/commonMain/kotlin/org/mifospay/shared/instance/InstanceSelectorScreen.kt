@@ -50,6 +50,8 @@ import cmp.shared.generated.resources.no_interbank_servers
 import cmp.shared.generated.resources.select_instance
 import cmp.shared.generated.resources.tenant_value
 import cmp.shared.generated.resources.update
+import kpt.core.base.designsystem.KptTheme
+import kpt.core.base.designsystem.theme.KptTheme
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
@@ -63,8 +65,6 @@ import org.mifospay.core.model.instance.InterbankServer
 import org.mifospay.core.model.instance.ServerInstance
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.KptTheme
-import template.core.base.designsystem.theme.KptTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

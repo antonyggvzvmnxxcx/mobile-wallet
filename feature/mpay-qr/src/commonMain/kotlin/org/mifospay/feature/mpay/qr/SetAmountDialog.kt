@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr.generated.resources.Res
 import mifos_pay.feature.mpay_qr.generated.resources.feature_request_money_cancel
 import mifos_pay.feature.mpay_qr.generated.resources.feature_request_money_confirm
@@ -44,7 +45,6 @@ import org.mifospay.core.designsystem.component.MifosTextField
 import org.mifospay.core.designsystem.utils.onClick
 import org.mifospay.core.model.utils.CurrencyCode
 import org.mifospay.core.ui.AvatarBox
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun SetAmountDialog(

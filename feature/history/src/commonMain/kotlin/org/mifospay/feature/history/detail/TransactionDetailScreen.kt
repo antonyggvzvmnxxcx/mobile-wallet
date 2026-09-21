@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.history.generated.resources.Res
 import mifos_pay.feature.history.generated.resources.feature_history_error
 import mifos_pay.feature.history.generated.resources.feature_history_error_oops
@@ -33,7 +34,6 @@ import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
 import org.mifospay.feature.history.components.TransactionDetail
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun TransactionDetailScreen(

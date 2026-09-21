@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.upi_setup.generated.resources.Res
 import mifos_pay.feature.upi_setup.generated.resources.feature_upi_setup_enter_upi_pin
 import mifos_pay.feature.upi_setup.generated.resources.feature_upi_setup_invalid_upi_pin
@@ -48,7 +49,6 @@ import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.ui.VerifyStepHeader
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun UpiPinScreen(

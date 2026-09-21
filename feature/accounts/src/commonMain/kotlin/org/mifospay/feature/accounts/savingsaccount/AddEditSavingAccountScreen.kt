@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.toSize
 import androidx.compose.ui.window.PopupProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.accounts.generated.resources.Res
 import mifos_pay.feature.accounts.generated.resources.feature_accounts_add_allow_overdraft
 import mifos_pay.feature.accounts.generated.resources.feature_accounts_add_client_name
@@ -86,7 +87,6 @@ import org.mifospay.core.ui.EmptyContentScreen
 import org.mifospay.core.ui.MifosDivider
 import org.mifospay.core.ui.MifosProgressIndicator
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 internal fun AddEditSavingAccountScreen(

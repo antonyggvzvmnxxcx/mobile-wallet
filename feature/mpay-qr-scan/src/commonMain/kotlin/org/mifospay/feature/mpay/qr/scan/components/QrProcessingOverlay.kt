@@ -36,11 +36,11 @@ import androidx.compose.ui.unit.sp
 import coil3.ImageLoader
 import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.mpay_qr_scan.generated.resources.Res
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_preview_image
 import mifos_pay.feature.mpay_qr_scan.generated.resources.feature_qr_processing
 import org.jetbrains.compose.resources.stringResource
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun QrProcessingOverlay(

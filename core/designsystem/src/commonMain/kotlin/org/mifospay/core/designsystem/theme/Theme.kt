@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import template.core.base.designsystem.KptMaterialTheme
-import template.core.base.designsystem.theme.KptThemeProviderImpl
-import template.core.base.designsystem.toKptTypography
+import kpt.core.base.designsystem.KptMaterialTheme
+import kpt.core.base.designsystem.theme.KptThemeProviderImpl
+import kpt.core.base.designsystem.toKptTypography
 
 @Composable
 fun MifosTheme(

@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.ui.generated.resources.Res
 import kpt.core.ui.generated.resources.core_ui_money_in
 import kpt.core.ui.generated.resources.core_ui_money_out
@@ -37,7 +38,6 @@ import org.jetbrains.compose.resources.painterResource
 import org.mifospay.core.common.CurrencyFormatter
 import org.mifospay.core.model.savingsaccount.Transaction
 import org.mifospay.core.model.savingsaccount.TransactionType
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun TransactionItemCard(

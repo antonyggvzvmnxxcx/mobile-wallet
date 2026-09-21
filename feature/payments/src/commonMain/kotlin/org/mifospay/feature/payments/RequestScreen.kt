@@ -29,6 +29,7 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kpt.core.base.designsystem.theme.KptTheme
 import mifos_pay.feature.payments.generated.resources.Res
 import mifos_pay.feature.payments.generated.resources.baseline_content_copy
 import mifos_pay.feature.payments.generated.resources.feature_payments_mobile_number
@@ -42,7 +43,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.mifospay.core.designsystem.icon.MifosIcons
 import org.mifospay.core.designsystem.theme.MifosTheme
 import org.mifospay.core.ui.utils.EventsEffect
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun RequestScreen(

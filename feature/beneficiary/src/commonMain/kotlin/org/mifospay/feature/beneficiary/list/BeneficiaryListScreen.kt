@@ -42,6 +42,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
+import kpt.core.base.designsystem.theme.KptTheme
 import kpt.core.base.store.screen.ScreenState
 import kpt.core.base.ui.screen.ScreenContent
 import mifos_pay.feature.beneficiary.generated.resources.Res
@@ -67,7 +68,6 @@ import org.mifospay.feature.beneficiary.addupdatebeneficiary.BeneficiaryAddEditT
 import org.mifospay.feature.beneficiary.deletebeneficiary.DeleteBeneficiaryBottomSheet
 import org.mifospay.feature.beneficiary.deletebeneficiary.DeleteBeneficiaryState
 import org.mifospay.feature.beneficiary.deletebeneficiary.DeleteBeneficiaryViewModel
-import template.core.base.designsystem.theme.KptTheme
 
 @Composable
 fun BeneficiaryListScreen(
